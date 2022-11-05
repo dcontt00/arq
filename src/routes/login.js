@@ -14,8 +14,8 @@ router.post('/auth', function(request, response) {
         for(let i = 0; i < users.length; i++) {
             if(users[i].username === username && users[i].password === password) {
                 //Send Auth Token
-                request.status(200);
-                request.send("Correct Auth");
+                response.status(200);
+                response.send("Correct Auth");
                 response.end();
             }
         }
