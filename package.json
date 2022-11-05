@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dcontt00/arq/issues"
   },
-  "homepage": "https://github.com/dcontt00/arq#readme"
+  "homepage": "https://github.com/dcontt00/arq#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
