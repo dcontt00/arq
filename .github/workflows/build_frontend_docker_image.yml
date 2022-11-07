@@ -8,10 +8,6 @@ name: Build frontend docker image
 on:
   schedule:
     - cron: '42 13 * * *'
-  push:
-    branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
 
@@ -74,7 +70,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
-          context: backend/
+          context: frontend/
           push: ${{ github.event_name != 'pull_request' }}
           tags: ghcr.io/dcontt00/arq:frontend
           labels: ${{ steps.meta.outputs.labels }}
