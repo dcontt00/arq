@@ -75,7 +75,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
-          context: backend/
+          context: frontend/
           push: ${{ github.event_name != 'pull_request' }}
           tags: ghcr.io/dcontt00/arq_frontend:latest
           labels: ${{ steps.meta.outputs.labels }}
