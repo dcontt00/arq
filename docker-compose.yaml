@@ -1,7 +1,6 @@
 version: "3"
 services:
     backend:
-        image: backend
-        build: .
+        image: ghcr.io/dcontt00/arq:main
         ports: 
             - "3001:3001"
