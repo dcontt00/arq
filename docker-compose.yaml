@@ -1,0 +1,10 @@
+version: "3"
+services:
+    backend:
+        image: ghcr.io/dcontt00/arq_backend:latest
+        ports: 
+            - "3001:3001"
+    frontend:
+            image: ghcr.io/dcontt00/arq_frontend:latest
+            ports: 
+                - "80:80"
