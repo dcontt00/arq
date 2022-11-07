@@ -76,7 +76,7 @@ jobs:
         with:
           context: backend/
           push: ${{ github.event_name != 'pull_request' }}
-          tags: dcontt00/arq:backend
+          tags: ghcr.io/dcontt00/arq:backend
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
