@@ -10,7 +10,7 @@ on:
     - cron: '42 13 * * *'
     
   push:
-    branches: ["main"]
+    branches: ["frontend"]
 
   pull_request:
     branches: [ "main" ]
@@ -77,7 +77,7 @@ jobs:
         with:
           context: frontend/
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/dcontt00/arq_frontend:latest
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
