@@ -15,3 +15,5 @@ router.get('/read/data', function(request, response){
     response.send();
     response.end();
 });
+
+module.exports = router;
