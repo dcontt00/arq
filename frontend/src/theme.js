@@ -1,10 +1,9 @@
 import { createTheme } from '@mui/material/styles';
-import { height } from '@mui/system';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#BF0202'
+      main: '#0BFA12'
     }
   },
 
