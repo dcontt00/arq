@@ -8,9 +8,7 @@ name: Backend Build docker image
 on:
   schedule:
     - cron: '42 13 * * *'
-    
-  push:
-    branches: ["main"]
+
 
   pull_request:
     branches: [ "main" ]
