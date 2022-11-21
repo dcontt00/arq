@@ -1,33 +1,38 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import { CardContent, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 export default function Home(){
 
     return (
-        <Box sx={{display:'flex'}}>
+        <div>
             {/*Barra del Menu*/}
-            <AppBar><Typography color="white">
+            <AppBar position="static"><Typography color="white">
                 <Toolbar>
-                <Grid container spacing={4}>
-                    <Grid item xs={1.5}><Box sx={{backgroundColor:'#0A640D', textAlign:'center',fontSize:'26'}}>Inicio</Box></Grid>
-                    <Grid item xs={1.5}><Box sx={{backgroundColor:'#0A640D', textAlign:'center',fontSize:'26'}}>Datos</Box></Grid>
-                    <Grid item xs={1.5}><Box sx={{backgroundColor:'#0A640D', textAlign:'center',fontSize:'26'}}>Control</Box></Grid>
-                    <Grid item xs={1.5}><Box sx={{backgroundColor:'#0A640D', textAlign:'center',fontSize:'26'}}>Cámara</Box></Grid>
-                </Grid>  
+                    {/*0CA712*/}
+                    <Stack spacing={2} direction="row">
+                        <Button variant="contained" sx={{fontSize:'22'}}>Inicio</Button>
+                        <Button variant="contained" sx={{fontSize:'22'}}>Datos</Button>
+                        <Button variant="contained" sx={{fontSize:'22'}}>Control</Button>
+                        <Button variant="contained" sx={{fontSize:'22'}}>Cámara</Button>
+                    </Stack>
                 </Toolbar>
             </Typography></AppBar>
 
             {/*Parte de las Graficas*/}
-            <Box sx={{p:3, width:'100%', backgroundColor:'red'}}><Typography>
-                <Toolbar/>
-                <Card><CardContent>Tarjeta de prueba</CardContent></Card>
-            </Typography></Box>
-
-        </Box>
+            <Grid container sx={{paddingTop:"2%",backgroundColor:'red'}}>
+                <Grid item lg={5.5}>
+                    <Card><CardContent>Tarjeta de prueba</CardContent></Card>
+                </Grid>
+                <Grid item lg={5.5}>
+                    <Card><CardContent>Tarjeta de prueba</CardContent></Card>
+                </Grid>
+            </Grid>
+        </div>
     );
 }

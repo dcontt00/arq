@@ -9,13 +9,11 @@ export default function App(){
   return(
     <ThemeProvider theme={theme}>
       <Router>
-        <div>
           <Routes>
             <Route path='/' element={<Navigate to='/login' />}></Route>
             <Route path='/login' element={<Login />}></Route>
             <Route path='/home' element={<Home />}></Route>
           </Routes>
-        </div>
       </Router>
     </ThemeProvider>
   );
