@@ -1,33 +1,25 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid';
-import { CardContent, Typography } from '@mui/material';
-import Card from '@mui/material/Card';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Grid from "@mui/material/Grid";
+import { CardContent, Typography } from "@mui/material";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
-export default function Home(){
-
-    return (
-        <Box sx={{display:'flex'}}>
-            {/*Barra del Menu*/}
-            <AppBar><Typography color="white">
-                <Toolbar>
-                <Grid container spacing={4}>
-                    <Grid item xs={1.5}><Box sx={{backgroundColor:'#0A640D', textAlign:'center',fontSize:'26'}}>Inicio</Box></Grid>
-                    <Grid item xs={1.5}><Box sx={{backgroundColor:'#0A640D', textAlign:'center',fontSize:'26'}}>Datos</Box></Grid>
-                    <Grid item xs={1.5}><Box sx={{backgroundColor:'#0A640D', textAlign:'center',fontSize:'26'}}>Control</Box></Grid>
-                    <Grid item xs={1.5}><Box sx={{backgroundColor:'#0A640D', textAlign:'center',fontSize:'26'}}>Cámara</Box></Grid>
-                </Grid>  
-                </Toolbar>
-            </Typography></AppBar>
-
-            {/*Parte de las Graficas*/}
-            <Box sx={{p:3, width:'100%', backgroundColor:'red'}}><Typography>
-                <Toolbar/>
-                <Card><CardContent>Tarjeta de prueba</CardContent></Card>
-            </Typography></Box>
-
-        </Box>
-    );
+export default function Home() {
+  return (
+    <Grid container spacing={2}>
+      <Grid item lg={7}>
+        {/** Ultima foto del invernadero */}
+        <img src="planta.jpeg" width={"100%"} />
+      </Grid>
+      <Grid item lg={5}>
+        {/** Datos del invernadero */}
+        <Card>
+          <CardContent>Tarjeta de prueba</CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+  );
 }
