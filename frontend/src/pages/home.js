@@ -10,13 +10,11 @@ import Button from "@mui/material/Button";
 export default function Home() {
   return (
     <Grid container>
-      <Grid item lg={6}>
+      <Grid item lg={7}>
         {/** Ultima foto del invernadero */}
-        <Card>
-          <CardContent>Tarjeta de prueba</CardContent>
-        </Card>
+        <img src="planta.jpeg" width={"100%"} />
       </Grid>
-      <Grid item lg={6}>
+      <Grid item lg={5}>
         {/** Datos del invernadero */}
         <Card>
           <CardContent>Tarjeta de prueba</CardContent>
