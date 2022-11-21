@@ -49,3 +49,23 @@ class Database:
         cur = self.conn.cursor()
         cur.execute(sql, data)
         self.conn.commit()
+
+    def get_data(self):
+        """get data from the database"""
+        sql = """ SELECT * FROM data """
+
+        cur = self.conn.cursor()
+        cur.execute(sql)
+        rows = cur.fetchall()
+        data = []
+        for row in rows:
+            data.append(
+                {
+                    "id": row[0],
+                    "date": row[1],
+                    "temperature": row[2],
+                    "humidity": row[3],
+                    "soil_moisture": row[4],
+                }
+            )
+        return data
