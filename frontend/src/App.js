@@ -10,7 +10,8 @@ import {
 import Login from "./pages/login";
 import Home from "./pages/home";
 import Appbar from "./components/Appbar";
-
+import { Container } from "@mui/system";
+import "./App.css";
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
