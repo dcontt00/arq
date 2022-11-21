@@ -1,7 +1,7 @@
 # Backend
 
-Ejecutar desde backend/ :
-`uvicorn src.main:app --reload`
+Ejecutar desde src/ :
+`uvicorn main:app --reload`
 
 ## Rutas
 
