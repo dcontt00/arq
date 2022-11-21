@@ -1,25 +1,12 @@
-import time
-import board
-import adafruit_dht
-import psutil
+import Adafruit_DHT
 
-PIN=board.D4
+DHT_SENSOR = Adafruit_DHT.DHT11
+DHT_PIN = 4
 
-# We first check if a libgpiod process is running. If yes, we kill it!
-for proc in psutil.process_iter():
-    if proc.name() == "libgpiod_pulsein" or proc.name() == "libgpiod_pulsei":
-        proc.kill()
-sensor = adafruit_dht.DHT11(PIN)
 while True:
-    try:
-        temp = sensor.temperature
-        humidity = sensor.humidity
-        print("Temperature: {}*C   Humidity: {}% ".format(temp, humidity))
-    except RuntimeError as error:
-        print(error.args[0])
-        time.sleep(2.0)
-        continue
-    except Exception as error:
-        sensor.exit()
-        raise error
-    time.sleep(2.0)
+    humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+
+    if humidity is not None and temperature is not None:
+        print("Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(temperature, humidity))
+    else:
+        print("Failed to retrieve data from humidity sensor")
