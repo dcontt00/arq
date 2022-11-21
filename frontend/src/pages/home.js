@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 
 export default function Home() {
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item lg={7}>
         {/** Ultima foto del invernadero */}
         <img src="planta.jpeg" width={"100%"} />
