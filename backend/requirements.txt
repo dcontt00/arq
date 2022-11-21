@@ -1,3 +1,2 @@
 fastapi[all]
 adafruit-circuitpython-dht
-Adafruit_DHT
