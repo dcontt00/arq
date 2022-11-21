@@ -1,5 +1,8 @@
 import sqlite3
 import os
+import logger
+
+log = logger.getLogger(__name__)
 
 DB = "../db/database.sqlite"
 
@@ -19,6 +22,7 @@ class Database:
         conn = None
         try:
             conn = sqlite3.connect(db_file)
+            log.info("Connected to database")
             return conn
         except Exception as e:
             print(e)
@@ -49,6 +53,7 @@ class Database:
         cur = self.conn.cursor()
         cur.execute(sql, data)
         self.conn.commit()
+        log.info("Added data to database")
 
     def get_data(self):
         """get data from the database"""
