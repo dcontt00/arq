@@ -1,3 +1,4 @@
+
 import adafruit_dht
 
 
@@ -13,3 +14,4 @@ class DHT11:
     def read_str(self):
         humidity, temperature = self.read()
         return "Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(temperature, humidity)
+
