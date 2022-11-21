@@ -6,10 +6,6 @@ name: Backend Build docker image
 # documentation.
 
 on:
-  schedule:
-    - cron: '42 13 * * *'
-
-
   pull_request:
     branches: [ "main" ]
     types:
