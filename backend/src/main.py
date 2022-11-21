@@ -1,9 +1,13 @@
 from fastapi import FastAPI
-from database import create_db_file
 from dht11 import DHT11
-from soil_moisture import SoilMoisture
+
+# from soil_moisture import SoilMoisture
+from database import Database
 
 app = FastAPI()
+dh11 = DHT11()
+# soilMoisture = SoilMoisture()
+db = Database()
 
 
 @app.get("/")
@@ -18,9 +22,18 @@ async def get_data():
     Returns:
         _type_: _description_
     """
-    create_db_file()
 
-    return {"message": "Hello World"}
+    """ temperature, humidity = dh11.read()
+    soil_moisture = soilMoisture.read() """
+    temperature = 22
+    humidity = 0.56
+    soil_moisture = 1
+
+    return {
+        "temperature": temperature,
+        "humidity": humidity,
+        "soil_moisture": soil_moisture,
+    }
 
 
 @app.get("/data/historical")
@@ -30,7 +43,7 @@ async def get_historical_data():
     Returns:
         dict: historical data
     """
-    return {"message": "Hello World"}
+    return db.get_data()
 
 
 def periodic_data():
