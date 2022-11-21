@@ -1,6 +1,9 @@
-# Leer sensor dht11 (temperatura y humedad)
+# Backend
 
-Instalar libreria necesaria
-`npm install node-dht-sensor`
+Ejecutar desde backend/ :
+`uvicorn src.main:app --reload`
 
-Probar con src/test_dht.js
+## Rutas
+
+/data: Obtiene info de temperatura/humedad
+/control: Controla los parámetros para regar, etc
