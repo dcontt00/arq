@@ -6,6 +6,7 @@ import { CardContent, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Datos from "../components/Datos";
 
 export default function Home() {
   return (
@@ -16,6 +17,8 @@ export default function Home() {
       </Grid>
       <Grid item lg={5}>
         {/** Datos del invernadero */}
+
+        <Datos />
         <Card>
           <CardContent>Tarjeta de prueba</CardContent>
         </Card>
