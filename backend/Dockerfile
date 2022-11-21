@@ -1,19 +1,16 @@
-FROM node:16
+FROM python:3.9.12-slim
 
-# Create app directory
-WORKDIR /usr/src/app
+COPY requirements.txt /tmp
+RUN pip install -r /tmp/requirements.txt
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+EXPOSE 8000
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+WORKDIR /usr/src/projectname
 
-# Bundle app source
-COPY . .
+ENV PORT 8000
+ENV HOST "0.0.0.0"
+COPY ./src/ /projectname/src
 
-EXPOSE 8080
-CMD [ "node", "src/server.js" ]
+WORKDIR /projectname
+
+CMD ["uvicorn", "src.main:app"]
