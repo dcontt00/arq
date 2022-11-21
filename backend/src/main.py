@@ -6,8 +6,8 @@ from time import sleep
 from database import Database
 
 app = FastAPI()
-dh11 = DHT11()
-# soilMoisture = SoilMoisture()
+dh11 = DHT11(17)
+# soilMoisture = SoilMoisture(21)
 db = Database()
 
 MINS_TO_UPDATE = 1

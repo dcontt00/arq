@@ -2,9 +2,9 @@ import adafruit_dht
 
 
 class DHT11:
-    def __init__(self) -> None:
+    def __init__(self, pin: int) -> None:
         self.DHT_SENSOR = adafruit_dht.DHT11
-        self.DHT_PIN = 17
+        self.DHT_PIN = pin
 
     def read(self):
         humidity, temperature = Adafruit_DHT.read_retry(self.DHT_SENSOR, self.DHT_PIN)
