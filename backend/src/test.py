@@ -8,4 +8,5 @@ while True:
     test_dht11()
     test_light_sensor()
     test_soil_moisture()
-    sleep(1)
+    print()
+    sleep(3)
