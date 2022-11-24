@@ -23,6 +23,4 @@ class SoilMoisture:
 
 def test_soil_moisture():
     soil_moisture = SoilMoisture(pin=21)
-    while True:
-        print(soil_moisture.read())
-        time.sleep(1)
+    print(soil_moisture.read())
