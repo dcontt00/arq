@@ -1,10 +1,10 @@
-import adafruit_dht
+import Adafruit_DHT
 import time
 
 
 class DHT11:
     def __init__(self, pin: int) -> None:
-        self.DHT_SENSOR = adafruit_dht.DHT11
+        self.DHT_SENSOR = Adafruit_DHT.DHT11
         self.DHT_PIN = pin
 
     def read(self):
