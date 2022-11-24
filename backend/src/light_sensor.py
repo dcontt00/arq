@@ -20,7 +20,13 @@ class LightSensor:
         """
         return GPIO.input(self.pin)
 
+    def read_str(self) -> str:
+        status = "No Light"
+        if self.read() == 0:
+            status = "Light"
+        return f"Light Sensor: {status}"
+
 
 def test_light_sensor():
     light_sensor = LightSensor(pin=21)
-    print(light_sensor.read())
+    print(light_sensor.read_str())

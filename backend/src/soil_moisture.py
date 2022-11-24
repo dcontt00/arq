@@ -20,7 +20,13 @@ class SoilMoisture:
         """
         return GPIO.input(self.pin)
 
+    def read_str(self) -> str:
+        status = "Dry"
+        if self.read() == 0:
+            status = "Wet"
+        return f"Soil Moisture: {status}"
+
 
 def test_soil_moisture():
     soil_moisture = SoilMoisture(pin=21)
-    print(soil_moisture.read())
+    print(soil_moisture.read_str())
