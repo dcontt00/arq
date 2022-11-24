@@ -5,8 +5,11 @@ from time import sleep
 
 
 while True:
-    test_dht11()
-    test_light_sensor()
-    test_soil_moisture()
-    print()
-    sleep(3)
+    try:
+        test_dht11()
+        test_light_sensor()
+        test_soil_moisture()
+        print()
+        sleep(3)
+    except KeyboardInterrupt:
+        break
