@@ -1,5 +1,5 @@
-
 import adafruit_dht
+import time
 
 
 class DHT11:
@@ -15,3 +15,9 @@ class DHT11:
         humidity, temperature = self.read()
         return "Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(temperature, humidity)
 
+
+def test_dht11():
+    dht11 = DHT11(pin=4)
+    while True:
+        print(dht11.read_str())
+        time.sleep(1)

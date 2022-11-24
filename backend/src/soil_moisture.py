@@ -19,3 +19,10 @@ class SoilMoisture:
            int: 0 is wet and 1 is dry
         """
         return GPIO.input(self.pin)
+
+
+def test_soil_moisture():
+    soil_moisture = SoilMoisture(pin=17)
+    while True:
+        print(soil_moisture.read())
+        time.sleep(1)

@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from dht11 import DHT11
 from time import sleep
 
+
 # from soil_moisture import SoilMoisture
 from database import Database
 

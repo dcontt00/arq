@@ -19,3 +19,10 @@ class LightSensor:
            int: 0 is wet and 1 is dry
         """
         return GPIO.input(self.pin)
+
+
+def test_light_sensor():
+    light_sensor = LightSensor(pin=17)
+    while True:
+        print(light_sensor.read())
+        time.sleep(1)
