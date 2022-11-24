@@ -16,7 +16,7 @@ class LightSensor:
         """_summary_
 
         Returns:
-           int: 0 is wet and 1 is dry
+           int: 0 theres light and 1 no light
         """
         return GPIO.input(self.pin)
 

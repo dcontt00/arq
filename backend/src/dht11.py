@@ -18,6 +18,5 @@ class DHT11:
 
 def test_dht11():
     dht11 = DHT11(pin=4)
-    while True:
-        print(dht11.read_str())
-        time.sleep(1)
+    print(dht11.read_str())
+
