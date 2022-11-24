@@ -22,7 +22,7 @@ class LightSensor:
 
 
 def test_light_sensor():
-    light_sensor = LightSensor(pin=17)
+    light_sensor = LightSensor(pin=21)
     while True:
         print(light_sensor.read())
         time.sleep(1)
