@@ -10,3 +10,7 @@ Ejecutar desde src/ :
 /data: Obtiene info de temperatura/humedad
 /data/historiacl: Obtiene el historial de datos de la base de datos
 /control: Controla los parámetros para regar, etc
+
+## Conexiones raspberry
+
+![](raspberry_connections.png)
