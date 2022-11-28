@@ -28,7 +28,7 @@ def hello_world():
     return {"message": "Hello World"}
 
 
-@app.route("/data")
+@app.route("/data", methods=["GET"])
 def get_data():
     """Gets data from all sensors
 
@@ -57,6 +57,18 @@ def get_data():
         "relay3": relay_3,
         "light": light,
     }
+
+
+@app.route("/relay", methods=["POST"])
+def toggle_relay():
+    data = request.json()
+    id = data["id"]
+    if id == 1:
+        relay1.toggle()
+    elif id == 2:
+        relay2.toggle()
+    else:
+        relay3.toggle()
 
 
 @app.route("/data/historical")
