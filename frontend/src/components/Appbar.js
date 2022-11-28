@@ -6,14 +6,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
-import { useNavigate } from 'react-router';
 
 const pages = ["Inicio", "Datos", "Control", "Cámara"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   return (
     <AppBar position="static">
