@@ -61,8 +61,7 @@ def get_data():
 
 @app.route("/relay", methods=["POST"])
 def toggle_relay():
-    data = request.json()
-    id = data["id"]
+    id = request.form.get("id")
     if id == 1:
         relay1.toggle()
     elif id == 2:
