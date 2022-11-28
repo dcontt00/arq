@@ -27,6 +27,6 @@ class LightSensor:
         return f"Light Sensor: {status}"
 
 
-def test_light_sensor():
-    light_sensor = LightSensor(pin=21)
+def test_light_sensor(pin):
+    light_sensor = LightSensor(pin)
     print(light_sensor.read_str())

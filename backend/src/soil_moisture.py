@@ -27,6 +27,6 @@ class SoilMoisture:
         return f"Soil Moisture: {status}"
 
 
-def test_soil_moisture():
-    soil_moisture = SoilMoisture(pin=21)
+def test_soil_moisture(pin):
+    soil_moisture = SoilMoisture(pin)
     print(soil_moisture.read_str())

@@ -16,6 +16,6 @@ class DHT11:
         return "Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(temperature, humidity)
 
 
-def test_dht11():
-    dht11 = DHT11(pin=4)
+def test_dht11(pin):
+    dht11 = DHT11(pin)
     print(dht11.read_str())
