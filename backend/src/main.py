@@ -49,7 +49,7 @@ def get_historical_data():
     Returns:
         dict: historical data
     """
-    return db.get_data()
+    return {"data": db.get_data()}
 
 
 def periodic_data():
