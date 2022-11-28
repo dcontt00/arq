@@ -1,10 +1,11 @@
 from flask import Flask, jsonify, request, send_file
-from dht11 import DHT11
 from time import sleep
+from database import Database
+
+from dht11 import DHT11
 from light_sensor import LightSensor
 from relay import Relay
 from soil_moisture import SoilMoisture
-from database import Database
 import RPi.GPIO as GPIO
 
 GPIO.cleanup()
@@ -45,7 +46,16 @@ def get_data():
     relay_3 = relay3.status()
     light = light_sensor.read()
 
-    # temperature, humidity, soil_moisture = test_data()
+    """ (
+        humidity,
+        light,
+        relay_1,
+        relay_2,
+        relay_3,
+        soil_moisture1,
+        soil_moisture2,
+        temperature,
+    ) = test_data() """
 
     return {
         "temperature": temperature,
@@ -70,6 +80,8 @@ def toggle_relay():
     else:
         relay3.toggle()
 
+    return {"message": f"Relay {id} toggled"}
+
 
 @app.route("/data/historical")
 def get_historical_data():
@@ -92,7 +104,7 @@ def periodic_data():
 
 
 def test_data():
-    return 20.0, 50.0, 0
+    return 20.0, 0, "Relay: Off", "Relay: Off", "Relay: Off", 0, 0, 24
 
 
 """ periodic_data() """
