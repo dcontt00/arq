@@ -13,12 +13,7 @@ import { useNavigate } from 'react-router';
 function Copyright(props) {
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
-          Invernadero
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
+        {'Copyright © Invernadero '}{new Date().getFullYear()}{'.'}
       </Typography>
     );
 }
