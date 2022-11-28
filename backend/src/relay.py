@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-
+from time import sleep
 
 class Relay:
     def __init__(self, pin) -> None:
@@ -30,9 +30,9 @@ class Relay:
         return f"Relay: {status}"
 
 
+
 def test_relay(pin):
-    relay = Relay(pin)
+    relay=Relay(pin)
     relay.on()
-    print(relay.read_str())
+    sleep(3)
     relay.off()
-    print(relay.read_str())
