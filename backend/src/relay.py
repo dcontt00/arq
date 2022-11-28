@@ -24,7 +24,7 @@ class Relay:
     def is_off(self) -> bool:
         return GPIO.input(self.pin) == GPIO.LOW
 
-    def read_str(self) -> str:
+    def status(self) -> str:
         status = "Off"
         if self.is_on():
             status = "On"

@@ -1,11 +1,21 @@
 from flask import Flask, jsonify, request, send_file
 from dht11 import DHT11
 from time import sleep
+from light_sensor import LightSensor
+from relay import Relay
 from soil_moisture import SoilMoisture
 from database import Database
+import RPi.GPIO as GPIO
 
-dh11 = DHT11(17)
-soilMoisture = SoilMoisture(21)
+GPIO.cleanup()
+relay1 = Relay(2)
+relay2 = Relay(3)
+relay3 = Relay(4)
+soilMoisture1 = SoilMoisture(14)
+soilMoisture2 = SoilMoisture(15)
+dh11 = DHT11(18)
+light_sensor = LightSensor(23)
+
 db = Database()
 
 MINS_TO_UPDATE = 1
