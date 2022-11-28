@@ -30,7 +30,7 @@ class Relay:
         return f"Relay: {status}"
 
 
-def test_relay(ping):
+def test_relay(pin):
     relay = Relay(pin)
     relay.on()
     print(relay.read_str())
