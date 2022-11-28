@@ -1,15 +1,11 @@
 from flask import Flask, jsonify, request, send_file
-
-
-""" from dht11 import DHT11 """
+from dht11 import DHT11
 from time import sleep
-
-
-# from soil_moisture import SoilMoisture
+from soil_moisture import SoilMoisture
 from database import Database
 
-""" dh11 = DHT11(17) """
-# soilMoisture = SoilMoisture(21)
+dh11 = DHT11(17)
+soilMoisture = SoilMoisture(21)
 db = Database()
 
 MINS_TO_UPDATE = 1
@@ -31,9 +27,9 @@ def get_data():
             Example:{"temperature": 20.0,"humidity": 50.0,"soil_moisture": 0}
     """
 
-    """ temperature, humidity = dh11.read()
-    soil_moisture = soilMoisture.read() """
-    temperature, humidity, soil_moisture = test_data()
+    temperature, humidity = dh11.read()
+    soil_moisture = soilMoisture.read()
+    # temperature, humidity, soil_moisture = test_data()
 
     return {
         "temperature": temperature,
