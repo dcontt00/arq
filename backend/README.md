@@ -14,3 +14,8 @@ Ejecutar desde src/ :
 ## Conexiones raspberry
 
 ![](raspberry_connections.png)
+
+- 3 Relays
+- 2 Sensores humedad
+- 1 Sensor temperatura y humedad ambiental
+- 1 Sensor de luz
