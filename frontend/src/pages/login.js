@@ -32,7 +32,7 @@ export default function Login() {
         email: data.get('email'),
         password: data.get('password'),
       });
-      navigate("/home");
+      navigate("/inicio");
     };
   
     return (

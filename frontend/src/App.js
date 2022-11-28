@@ -21,10 +21,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/login" />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/Inicio" element={<Home />}></Route>
-          <Route path="/Datos" element={<Data />}></Route>
-          <Route path="/Control" element={<Control />}></Route>
-          <Route path="/Cámara" element={<Camera />}></Route>
+          <Route path="/inicio" element={<Home />}></Route>
+          <Route path="/datos" element={<Data />}></Route>
+          <Route path="/control" element={<Control />}></Route>
+          <Route path="/cámara" element={<Camera />}></Route>
         </Routes>
       </Router>
     </ThemeProvider>
