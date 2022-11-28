@@ -29,4 +29,4 @@ class SoilMoisture:
 
 def test_soil_moisture(pin):
     soil_moisture = SoilMoisture(pin)
-    print(soil_moisture.read_str())
+    print("Soil Moisture: " + soil_moisture.read_str())

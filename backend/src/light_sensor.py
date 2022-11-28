@@ -29,4 +29,4 @@ class LightSensor:
 
 def test_light_sensor(pin):
     light_sensor = LightSensor(pin)
-    print(light_sensor.read_str())
+    print("Light Sensor: " + light_sensor.read_str())

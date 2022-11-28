@@ -18,4 +18,4 @@ class DHT11:
 
 def test_dht11(pin):
     dht11 = DHT11(pin)
-    print(dht11.read_str())
+    print("DHT11: " + dht11.read_str())
