@@ -26,10 +26,6 @@ MINS_TO_UPDATE = 1
 PIC_PATH = "../data/pics/"
 if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
-picam2 = Picamera2()
-config = picam2.create_still_configuration()
-picam2.configure(config)
-
 app = Flask(__name__)
 
 
@@ -104,10 +100,8 @@ def get_historical_data():
 @app.route("/image")
 def get_image():
     date = time.strftime("%Y-%m-%d_%H:%M:%S")
+    os.system(f"libcamera-jpeg -o {PIC_PATH}{date}.jpg")
 
-    picam2.start()
-
-    picam2.capture_file(PIC_PATH + f"{date}.jpg")
     return send_file(PIC_PATH + f"{date}.jpg", mimetype="image/jpg")
 
 
