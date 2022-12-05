@@ -17,4 +17,7 @@ class Camera:
         picam2.start()
 
     def take_picture(self) -> None:
+        return picam2.capture()
+
+    def save_picture(self) -> None:
         picam2.capture(PIC_PATH + "test.jpg")
