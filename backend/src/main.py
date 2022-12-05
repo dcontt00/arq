@@ -17,6 +17,7 @@ relay1 = 4
 relay2 = 3
 relay3 = 4
 GPIO.setup(relay1, GPIO.OUT)
+GPIO.output(relay1, GPIO.LOW)
 # relay2 = Relay(3)
 # relay3 = Relay(4)
 soilMoisture1 = SoilMoisture(14)
