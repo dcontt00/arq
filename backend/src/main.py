@@ -7,7 +7,6 @@ from dht11 import DHT11
 from light_sensor import LightSensor
 from relay import Relay
 from soil_moisture import SoilMoisture
-from camera import save_picture
 import time
 import RPi.GPIO as GPIO
 
