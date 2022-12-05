@@ -96,8 +96,8 @@ def get_historical_data():
 
 @app.route("/image")
 def get_image():
-    save_picture()
-    return send_file(PIC_PATH + "test.jpg", mimetype="image/jpg")
+    pic = save_picture()
+    return send_file(pic, mimetype="image/jpg")
 
 
 def periodic_data():
