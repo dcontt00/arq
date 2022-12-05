@@ -9,10 +9,14 @@ class Camera:
     def __init__(self) -> None:
         if not os.path.exists("../data/pics"):
             os.makedirs("../data/pics")
-        picam2 = Picamera2()
+        self._picam2 = Picamera2()
         config = picam2.create_still_configuration()
-        picam2.configure(config)
-        picam2.start()
+        self._picam2.configure(config)
+        self._picam2.start()
+
+    @property
+    def picam2(self) -> Picamera2:
+        return self._picam2
 
     def take_picture(self) -> None:
         return picam2.capture()
