@@ -1,12 +1,14 @@
 from flask import Flask, jsonify, request, send_file
 from time import sleep
 from database import Database
-
+import os
+from picamera2 import Picamera2
 from dht11 import DHT11
 from light_sensor import LightSensor
 from relay import Relay
 from soil_moisture import SoilMoisture
 from camera import save_picture
+import time
 import RPi.GPIO as GPIO
 
 relay1 = Relay(2)
@@ -22,6 +24,11 @@ db = Database()
 
 MINS_TO_UPDATE = 1
 PIC_PATH = "../data/pics/"
+if not os.path.exists("../data/pics"):
+    os.makedirs("../data/pics")
+picam2 = Picamera2()
+config = picam2.create_still_configuration()
+picam2.configure(config)
 
 app = Flask(__name__)
 
@@ -96,8 +103,12 @@ def get_historical_data():
 
 @app.route("/image")
 def get_image():
-    pic = save_picture()
-    return send_file(pic, mimetype="image/jpg")
+    date = time.strftime("%Y-%m-%d_%H:%M:%S")
+
+    picam2.start()
+
+    picam2.capture_file(PIC_PATH + f"{date}.jpg")
+    return send_file(PIC_PATH + f"{date}.jpg", mimetype="image/jpg")
 
 
 def periodic_data():
