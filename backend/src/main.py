@@ -6,7 +6,7 @@ from dht11 import DHT11
 from light_sensor import LightSensor
 from relay import Relay
 from soil_moisture import SoilMoisture
-from camera import take_picture, save_picture
+from camera import Camera
 import RPi.GPIO as GPIO
 
 relay1 = Relay(2)
@@ -16,6 +16,7 @@ soilMoisture1 = SoilMoisture(14)
 soilMoisture2 = SoilMoisture(15)
 dh11 = DHT11(18)
 light_sensor = LightSensor(23)
+camera = Camera()
 
 
 db = Database()
@@ -96,7 +97,7 @@ def get_historical_data():
 
 @app.route("/image")
 def get_image():
-    pic = save_picture()
+    pic = camera.save_picture()
     return send_file(pic, mimetype="image/jpg")
 
 

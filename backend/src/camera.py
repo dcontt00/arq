@@ -7,6 +7,21 @@ if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
 
 
+class Camera:
+    def __init__(self) -> None:
+        self.camera = Picamera2()
+        config = self.camera.create_still_configuration()
+        self.camera.configure(config)
+        time.sleep(2)
+
+        self.camera.start()
+
+    def save_picture(self):
+        date = time.strftime("%Y-%m-%d_%H:%M:%S")
+        self.camera.capture(PIC_PATH + f"{date}.jpg")
+        return PIC_PATH + f"{date}.jpg"
+
+
 def take_picture():
     save_picture()
 
