@@ -1,19 +1,15 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import { CardContent, Typography } from "@mui/material";
-import Card from "@mui/material/Card";
-import Datos from "../components/Datos";
+import {Typography} from "@mui/material";
 import AppBar from "../components/Appbar";
-
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { FixedSizeList, ListChildComponentProps } from 'react-window';
+import { FixedSizeList } from 'react-window';
 
-function renderRow(props: ListChildComponentProps) {
+function renderRow(props) {
   const { index, style } = props;
-
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
       <ListItemButton>
@@ -22,7 +18,6 @@ function renderRow(props: ListChildComponentProps) {
     </ListItem>
   );
 }
-
 
 export default function Home() {
   return (
@@ -37,15 +32,7 @@ export default function Home() {
         {/* Datos de los invernaderos */}
         <Grid item lg={5}>
           <Box sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}>
-            <FixedSizeList
-              height={500}
-              width={600}
-              itemSize={46}
-              itemCount={200}
-              overscanCount={5}
-            >
-            {renderRow}
-            </FixedSizeList>
+            <FixedSizeList height={500} width={600} itemSize={46} itemCount={20} overscanCount={5}>{renderRow}</FixedSizeList>
           </Box>
         </Grid>
       </Grid>
