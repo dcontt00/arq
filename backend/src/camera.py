@@ -2,7 +2,7 @@ import time
 from picamera2 import Picamera2
 import os
 
-PIC_PATH = "../data/pic/"
+PIC_PATH = "../data/pics/"
 if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
 
