@@ -93,9 +93,9 @@ def get_data():
 
 
 @app.route("/relay/off", methods=["POST"])
-def post_relay_off():
+def post_relay_toggle():
 
-    GPIO.output(relay1, GPIO.HIGH)
+    toggle_relay(1)
 
     """ data = request.get_json()
     id = int(data["id"])
@@ -108,24 +108,6 @@ def post_relay_off():
         toggle_relay(relay3) """
 
     return {"message": f"Relay {1} off"}
-
-
-@app.route("/relay/on", methods=["POST"])
-def post_relay_on():
-
-    GPIO.output(relay1, GPIO.LOW)
-
-    """ data = request.get_json()
-    id = int(data["id"])
-    if id == 1:
-        toggle_relay(relay1)
-    elif id == 2:
-        toggle_relay(relay2)
-
-    else:
-        toggle_relay(relay3) """
-
-    return {"message": f"Relay {1} on"}
 
 
 @app.route("/data/historical")
