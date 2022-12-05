@@ -10,7 +10,7 @@ DB = "../data/db/database.sqlite"
 class Database:
     def __init__(self) -> None:
         if not os.path.exists(DB):
-            os.mkdirs("../data/db")
+            os.makedirs("../data/db")
             f = open(DB, "w+")
             f.close()
 

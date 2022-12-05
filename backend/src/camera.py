@@ -8,7 +8,7 @@ PIC_PATH = "../data/pic/"
 class Camera:
     def __init__(self) -> None:
         if not os.path.exists("../data/pics"):
-            os.mkdirs("../data/pics")
+            os.makedirs("../data/pics")
         picam2 = Picamera2()
         preview_config = picam2.create_preview_configuration(main={"size": (800, 600)})
         picam2.configure(preview_config)
