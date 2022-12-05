@@ -7,13 +7,10 @@ if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
 
 
-def take_picture() -> None:
-    picam2 = Picamera2()
-    config = picam2.create_still_configuration()
-    picam2.configure(config)
-    picam2.start()
+def take_picture():
+    save_picture()
 
-    return picam2.capture()
+    return PIC_PATH + "test.jpg"
 
 
 def save_picture() -> None:
