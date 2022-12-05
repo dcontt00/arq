@@ -8,10 +8,12 @@ from light_sensor import LightSensor
 from soil_moisture import SoilMoisture
 import time
 import RPi.GPIO as GPIO
+from logger import getLogger
 
+log = getLogger(__name__)
 GPIO.setmode(GPIO.BCM)
 
-relay1 = 2
+relay1 = 4
 relay2 = 3
 relay3 = 4
 GPIO.setup(relay1, GPIO.OUT)
@@ -35,8 +37,11 @@ app = Flask(__name__)
 def toggle_relay(pin: int):
     status = GPIO.input(pin)
     if status == GPIO.HIGH:
+        log.info("Relay encendido, apagando")
         GPIO.output(pin, GPIO.LOW)
     else:
+        log.info("Relay apagado, encendiendo")
+
         GPIO.output(pin, GPIO.HIGH)
 
 
