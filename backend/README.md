@@ -20,7 +20,7 @@ Ejecutar desde src/ :
 
 ![](raspberry_connections.png)
 
-- 3 Relays: 2,3,4
+- 3 Relays:4, 17, 27
 - 2 Sensores humedad:14,15
 - 1 Sensor temperatura y humedad ambiental: 18
 - 1 Sensor de luz: 23

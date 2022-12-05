@@ -10,6 +10,9 @@ from soil_moisture import SoilMoisture
 import time
 import RPi.GPIO as GPIO
 
+GPIO.setmode(GPIO.BCM)
+
+
 relay1 = Relay(2)
 # relay2 = Relay(3)
 # relay3 = Relay(4)
