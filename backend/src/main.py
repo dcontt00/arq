@@ -21,6 +21,7 @@ light_sensor = LightSensor(23)
 db = Database()
 
 MINS_TO_UPDATE = 1
+PIC_PATH = "../data/pics/"
 
 app = Flask(__name__)
 
@@ -95,7 +96,8 @@ def get_historical_data():
 
 @app.route("/image")
 def get_image():
-    return send_file(take_picture(), mimetype="image/jpg")
+    save_picture()
+    return send_file(PIC_PATH + "test.jpg", mimetype="image/jpg")
 
 
 def periodic_data():
