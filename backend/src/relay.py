@@ -7,6 +7,7 @@ class Relay:
         self._pin = pin
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin, GPIO.OUT)
+        GPIO.output(pin,GPIO.HIGH)
 
     @property
     def pin(self) -> int:

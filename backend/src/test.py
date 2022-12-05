@@ -9,10 +9,10 @@ GPIO.cleanup()
 
 while True:
     try:
-        test_dht11(17)
-        test_light_sensor()
-        test_soil_moisture(21)
-        test_relay(4)
+        #test_dht11(17)
+        #test_light_sensor()
+        #test_soil_moisture(21)
+        #test_relay(4)
         print()
         sleep(3)
     except KeyboardInterrupt:

@@ -8,10 +8,9 @@ from relay import Relay
 from soil_moisture import SoilMoisture
 import RPi.GPIO as GPIO
 
-GPIO.cleanup()
 relay1 = Relay(2)
-relay2 = Relay(3)
-relay3 = Relay(4)
+#relay2 = Relay(3)
+#relay3 = Relay(4)
 soilMoisture1 = SoilMoisture(14)
 soilMoisture2 = SoilMoisture(15)
 dh11 = DHT11(18)
@@ -37,13 +36,12 @@ def get_data():
         dict: containing temperature, humidity, soil_moisture.
             Example:{"temperature": 20.0,"humidity": 50.0,"soil_moisture": 0}
     """
-
     temperature, humidity = dh11.read()
     soil_moisture1 = soilMoisture1.read()
     soil_moisture2 = soilMoisture2.read()
     relay_1 = relay1.status()
-    relay_2 = relay2.status()
-    relay_3 = relay3.status()
+    #relay_2 = relay2.status()
+    #relay_3 = relay3.status()
     light = light_sensor.read()
 
     """ (
@@ -63,8 +61,8 @@ def get_data():
         "soil_moisture1": soil_moisture1,
         "soil_moisture2": soil_moisture2,
         "relay1": relay_1,
-        "relay2": relay_2,
-        "relay3": relay_3,
+        #"relay2": relay_2,
+        #"relay3": relay_3,
         "light": light,
     }
 
@@ -110,3 +108,5 @@ def test_data():
 """ periodic_data() """
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
+GPIO.cleanup()
+    
