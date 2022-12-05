@@ -4,13 +4,13 @@ import logger
 
 log = logger.getLogger(__name__)
 
-DB = "../db/database.sqlite"
+DB = "../data/db/database.sqlite"
 
 
 class Database:
     def __init__(self) -> None:
         if not os.path.exists(DB):
-            os.mkdir("../db")
+            os.mkdir("../data/db")
             f = open(DB, "w+")
             f.close()
 
