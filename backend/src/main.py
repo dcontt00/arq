@@ -92,7 +92,7 @@ def get_data():
     }
 
 
-@app.route("/relay/off", methods=["POST"])
+@app.route("/relay", methods=["POST"])
 def post_relay_toggle():
 
     toggle_relay(1)
