@@ -17,9 +17,7 @@ relay1 = 4
 relay2 = 3
 relay3 = 4
 GPIO.setup(relay1, GPIO.OUT)
-GPIO.output(relay1, GPIO.HIGH)
-time.sleep(1)
-GPIO.output(relay1, GPIO.LOW)
+
 # relay2 = Relay(3)
 # relay3 = Relay(4)
 soilMoisture1 = SoilMoisture(14)
@@ -38,15 +36,8 @@ app = Flask(__name__)
 
 
 def toggle_relay(pin: int):
-    status = GPIO.input(pin)
-    print(status)
-    if status == GPIO.HIGH:
-        log.info("Relay encendido, apagando")
-        GPIO.output(pin, GPIO.LOW)
-    else:
-        log.info("Relay apagado, encendiendo")
-
-        GPIO.output(pin, GPIO.HIGH)
+    GPIO.output(relay1, GPIO.HIGH)
+    GPIO.output(relay1, GPIO.LOW)
 
 
 def get_relay_data(pin):
