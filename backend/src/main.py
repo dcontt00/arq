@@ -99,7 +99,7 @@ def get_historical_data():
 @app.route("/image")
 def get_image():
     date = time.strftime("%Y-%m-%d_%H:%M:%S")
-    os.system(f"libcamera-jpeg -o {PIC_PATH}{date}.jpg")
+    os.system(f"libcamera-still --immediate -o {PIC_PATH}{date}.jpg")
 
     return send_file(PIC_PATH + f"{date}.jpg", mimetype="image/jpg")
 
