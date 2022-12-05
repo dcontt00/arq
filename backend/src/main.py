@@ -6,7 +6,7 @@ from dht11 import DHT11
 from light_sensor import LightSensor
 from relay import Relay
 from soil_moisture import SoilMoisture
-from camera import take_picture, save_picture, stop
+from camera import take_picture, save_picture
 import RPi.GPIO as GPIO
 
 relay1 = Relay(2)
@@ -116,4 +116,3 @@ def test_data():
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
 GPIO.cleanup()
-stop()
