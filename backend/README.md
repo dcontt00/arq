@@ -1,9 +1,14 @@
 # Backend
 
+## Requisitos
+
+`sudo apt install -y python3-picamera2`
+`pip3 install -r requirements.txt`
+
 ## Ejecución
 
 Ejecutar desde src/ :
-`uvicorn main:app --reload`
+`python3 main.py`
 
 ## Rutas
 
