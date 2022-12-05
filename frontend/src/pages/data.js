@@ -15,6 +15,7 @@ export default function Data(){
         </Grid>
         {/* Datos de los invernaderos */}
         <Grid item lg={5}>
+        Los datos del invernadero se monitorizaran con grafana, para poder visualizarlos hay que incrustar grafana en un iframe.
         </Grid>
       </Grid>
     </div>
