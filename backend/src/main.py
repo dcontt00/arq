@@ -36,6 +36,7 @@ app = Flask(__name__)
 
 def toggle_relay(pin: int):
     status = GPIO.input(pin)
+    print(status)
     if status == GPIO.HIGH:
         log.info("Relay encendido, apagando")
         GPIO.output(pin, GPIO.LOW)
@@ -99,7 +100,10 @@ def get_data():
 
 @app.route("/relay", methods=["POST"])
 def post_toggle_relay():
-    data = request.get_json()
+
+    GPIO.output(relay1, GPIO.HIGH)
+
+    """ data = request.get_json()
     id = int(data["id"])
     if id == 1:
         toggle_relay(relay1)
@@ -107,9 +111,9 @@ def post_toggle_relay():
         toggle_relay(relay2)
 
     else:
-        toggle_relay(relay3)
+        toggle_relay(relay3) """
 
-    return {"message": f"Relay {id} toggled"}
+    return {"message": f"Relay {1} toggled"}
 
 
 @app.route("/data/historical")
