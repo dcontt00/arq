@@ -120,5 +120,7 @@ def test_data():
 
 """ periodic_data() """
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
-GPIO.cleanup()
+    try:
+        app.run(debug=True, port=8000)
+    except KeyboardInterrupt:
+        GPIO.cleanup()
