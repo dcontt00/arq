@@ -10,7 +10,7 @@ class Camera:
         if not os.path.exists("../data/pics"):
             os.makedirs("../data/pics")
         self._picam2 = Picamera2()
-        config = picam2.create_still_configuration()
+        config = self._picam2.create_still_configuration()
         self._picam2.configure(config)
         self._picam2.start()
 
