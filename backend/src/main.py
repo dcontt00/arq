@@ -5,15 +5,16 @@ import os
 from picamera2 import Picamera2
 from dht11 import DHT11
 from light_sensor import LightSensor
-from relay import Relay
 from soil_moisture import SoilMoisture
 import time
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 
-
-relay1 = Relay(2)
+relay1 = 2
+relay2 = 3
+relay3 = 4
+GPIO.setup(relay1, GPIO.OUT)
 # relay2 = Relay(3)
 # relay3 = Relay(4)
 soilMoisture1 = SoilMoisture(14)
@@ -29,6 +30,22 @@ PIC_PATH = "../data/pics/"
 if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
 app = Flask(__name__)
+
+
+def toggle_relay(pin: int):
+    status = GPIO.input(pin)
+    if status == GPIO.HIGH:
+        GPIO.output(pin, GPIO.LOW)
+    else:
+        GPIO.output(pin, GPIO.HIGH)
+
+
+def get_relay_data(pin):
+    temp = GPIO.input(pin)
+    status = "Off"
+    if temp == GPIO.HIGH:
+        status = "On"
+    return f"Relay: {status}"
 
 
 @app.route("/")
@@ -47,7 +64,7 @@ def get_data():
     temperature, humidity = dh11.read()
     soil_moisture1 = soilMoisture1.read()
     soil_moisture2 = soilMoisture2.read()
-    relay_1 = relay1.status()
+    relay_1 = get_relay_data(relay1)
     # relay_2 = relay2.status()
     # relay_3 = relay3.status()
     light = light_sensor.read()
@@ -80,11 +97,12 @@ def toggle_relay():
     data = request.get_json()
     id = int(data["id"])
     if id == 1:
-        relay1.toggle()
+        toggle_relay(relay1)
     elif id == 2:
-        relay2.toggle()
+        toggle_relay(relay2)
+
     else:
-        relay3.toggle()
+        toggle_relay(relay3)
 
     return {"message": f"Relay {id} toggled"}
 
