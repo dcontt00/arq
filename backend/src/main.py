@@ -13,7 +13,7 @@ from logger import getLogger
 log = getLogger(__name__)
 GPIO.setmode(GPIO.BCM)
 
-relay1 = 4
+relay1 = 21
 relay2 = 3
 relay3 = 4
 GPIO.setup(relay1, GPIO.OUT)
@@ -36,9 +36,12 @@ app = Flask(__name__)
 
 
 def toggle_relay(pin: int):
-    GPIO.output(relay1, GPIO.HIGH)
-    time.sleep(3)
-    GPIO.output(relay1, GPIO.LOW)
+    if GPIO.input(relay1)==GPIO.HIGH:  # Esta apagado
+        log.info("Realy is off, powering on")
+        GPIO.output(relay1, GPIO.LOW)
+    else:
+        log.info("Relay is on, powering off")
+        GPIO.output(relay1, GPIO.HIGH)
 
 def get_relay_data(pin):
     temp = GPIO.input(pin)
