@@ -34,11 +34,13 @@ app = Flask(__name__)
 
 def toggle_relay(pin: int):
     if pin == 1:
-        relay1.toggle()
+        status = relay1.toggle()
     elif pin == 2:
-        relay2.toggle()
+        status = relay2.toggle()
     else:
-        relay3.toggle()
+        status = relay3.toggle()
+
+    return status
 
 
 def get_relay_data(pin):
@@ -98,9 +100,9 @@ def post_relay_toggle():
 
     data = request.get_json()
     id = int(data["id"])
-    toggle_relay(id)
+    status = toggle_relay(id)
 
-    return {"message": f"Relay {id} toggled"}
+    return {"message": f"Relay {id} is {status}"}
 
 
 @app.route("/data/historical")
