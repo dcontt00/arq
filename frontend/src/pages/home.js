@@ -15,17 +15,22 @@ import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import imagenplanta from "../images/icono_planta.png";
 import { useNavigate } from 'react-router';
+import Button from '@mui/material/Button';
+
 
 export default function Home() {
   const navigate = useNavigate();
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log('You clicked submit.');
-    navigate("/datos y control");
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      navigate("/datos y control");
   }
   return (
     <div>
-      <Typography variant="h2" align="center" sx={{mt:"5"}}>SELECCIONA EL INVERNADERO</Typography>
+      <Grid container>
+        <Grid item lg={6} align="right" sx={{mt:"30", ml:"240"}}><Typography variant="h2"sx={{mt:"5"}}>SELECCIONA EL INVERNADERO</Typography></Grid>
+        <Grid item lg={3.7} align="right" sx={{mt:"30"}}><Typography variant="h6"sx={{mt:"1"}}>⬅BACK</Typography></Grid>
+      </Grid>
       <Grid container align="center">
         {/* Ultima foto del invernadero */}
         {/* Datos de los invernaderos */}
@@ -36,23 +41,19 @@ export default function Home() {
           </ImageListItem>
           {itemData.map((item) => (
          <ImageListItem key={item.img}>
-            <img onSubmit={handleSubmit}  src={imagenplanta} alt={item.title} loading="lazy" />
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                <Button type="submit" variant="contained">Entrar</Button>
+              </Box>
+            <img   src={imagenplanta} alt={item.title} loading="lazy" />
+            
           <ImageListItemBar
               title={item.title}
               subtitle={item.author}
-              actionIcon={
-                <IconButton
-                  type= "submit"
-                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                  aria-label={`info about ${item.title}`}
-                >
-                  <InfoIcon />
-                </IconButton>
-              }
             />
           </ImageListItem>
           ))}
          </ImageList>
+         
         </Grid>
       </Grid>
     </div>
@@ -67,17 +68,17 @@ const itemData = [
   },
   {
     img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-    title: 'Burger',
-    author: '@rollelflex_graphy726',
+    title: 'Invernadero 2',
+    author: '@dflorr00',
   },
   {
     img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-    title: 'Burger',
-    author: '@rollelflex_graphy726',
+    title: 'Invernadero 3',
+    author: '@dcontt00',
   },
   {
     img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-    title: 'Burger',
-    author: '@rollelflex_graphy726',
+    title: 'Invernadero 4',
+    author: '@rreisr00',
   },
 ];
