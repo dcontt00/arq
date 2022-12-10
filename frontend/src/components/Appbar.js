@@ -7,7 +7,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["Inicio", "Datos", "Control", "Cámara"];
+const pages = ["Inicio", "Datos y Control", "Cámara"];
 
 function ResponsiveAppBar() {
 
