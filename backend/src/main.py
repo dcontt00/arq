@@ -37,8 +37,8 @@ app = Flask(__name__)
 
 def toggle_relay(pin: int):
     GPIO.output(relay1, GPIO.HIGH)
+    time.sleep(3)
     GPIO.output(relay1, GPIO.LOW)
-
 
 def get_relay_data(pin):
     temp = GPIO.input(pin)
