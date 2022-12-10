@@ -98,15 +98,9 @@ def post_relay_toggle():
 
     data = request.get_json()
     id = int(data["id"])
-    if id == 1:
-        toggle_relay(relay1)
-    elif id == 2:
-        toggle_relay(relay2)
+    toggle_relay(id)
 
-    else:
-        toggle_relay(relay3)
-
-    return {"message": f"Relay {1} off"}
+    return {"message": f"Relay {id} toggled"}
 
 
 @app.route("/data/historical")
