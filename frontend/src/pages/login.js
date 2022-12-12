@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -27,7 +26,7 @@ export default function Login() {
         email: data.get('email'),
         password: data.get('password'),
       });
-      navigate("/inicio");
+      navigate("/data");
     };
   
     return (
@@ -72,7 +71,6 @@ export default function Login() {
                   autoComplete="user"
                   autoFocus
                 />
-                
                 <Button
                   type="submit"
                   fullWidth
@@ -81,9 +79,6 @@ export default function Login() {
                 >
                   Entrar
                 </Button>
-                <Grid container>
-                 
-                </Grid>
                 <Copyright sx={{ mt: 5 }} />
               </Box>
             </Box>

@@ -7,18 +7,16 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["Inicio", "Datos y Control", "Cámara"];
-
-function ResponsiveAppBar() {
+export default function ResponsiveAppBar() {
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/*Ir al login*/}
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
-            variant="h6"
-            noWrap
+            variant="h6" noWrap
             component="a"
             href="/"
             sx={{
@@ -33,21 +31,14 @@ function ResponsiveAppBar() {
           >
             LOGIN
           </Typography>
-
+          {/*Ir a Datos*/}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                href={"/"+page}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button href={"/data"} sx={{ my: 2, color: "white", display: "block" }}>Datos</Button>
+            <Button href={"/control"} sx={{ my: 2, color: "white", display: "block" }}>Control</Button>
+            <Button href={"/camera"} sx={{ my: 2, color: "white", display: "block" }}>Camara</Button>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
-export default ResponsiveAppBar;

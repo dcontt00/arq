@@ -8,7 +8,6 @@ import {
   Route,
 } from "react-router-dom";
 import Login from "./pages/login";
-import Home from "./pages/home";
 import Data from "./pages/data";
 import Control from "./pages/control";
 import Camera from "./pages/camera";
@@ -21,9 +20,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/login" />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/inicio" element={<Home />}></Route>
-          <Route path="/datos y control" element={<Data />}></Route>
-          <Route path="/cámara" element={<Camera />}></Route>
+          <Route path="/data" element={<Data />}></Route>
+          <Route path="/control" element={<Control />}></Route>
+          <Route path="/camera" element={<Camera />}></Route>
         </Routes>
       </Router>
     </ThemeProvider>
