@@ -1,44 +1,30 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
+import Paper from '@mui/material/Paper';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+
+const Item = styled(Paper)(({theme}) => ({color: theme.palette.text.secondary,}));
+const darkTheme = createTheme({ palette: { mode: 'dark' } });
 
 export default function ResponsiveAppBar() {
-
+  
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/*Ir al login*/}
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6" noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGIN
-          </Typography>
-          {/*Ir a Datos*/}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button href={"/data"} sx={{ my: 2, color: "white", display: "block" }}>Datos</Button>
-            <Button href={"/control"} sx={{ my: 2, color: "white", display: "block" }}>Control</Button>
-            <Button href={"/camera"} sx={{ my: 2, color: "white", display: "block" }}>Camara</Button>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <ThemeProvider theme={darkTheme}>
+    <Paper sx={{bgcolor: 'primary'}} square>
+      <Grid container spacing={1} sx={{width:"30%",ml:"10"}}>
+        <Grid item lg={3}>
+          <Button href={"/"} sx={{color: "white", display: "block" }}>
+            <Typography variant="h7" fontWeight="700"><AdbIcon/>LOGIN</Typography>
+          </Button>
+        </Grid>
+        <Grid item lg={3}><Button href={"/data"} sx={{ my: 1, color: "white", display: "block" }}>Datos</Button></Grid>
+        <Grid item lg={3}><Button href={"/control"} sx={{ my: 1, color: "white", display: "block" }}>Control</Button></Grid>
+        <Grid item lg={3}><Button href={"/camera"} sx={{ my: 1, color: "white", display: "block" }}>Camara</Button></Grid>
+      </Grid>
+    </Paper>
+    </ThemeProvider>
   );
 }
