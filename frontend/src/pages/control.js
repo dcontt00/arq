@@ -1,8 +1,8 @@
-import * as React from "react";
+import React, {useState } from 'react';
 import AppBar from "../components/Appbar";
 import Grid from "@mui/material/Grid";
 import {Typography} from "@mui/material";
-
+import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -10,15 +10,24 @@ import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/AddOutlined';
 import RemoveIcon from '@mui/icons-material/RemoveOutlined';
 
+import Checkbox from '@mui/material/Checkbox';
+import LightbulbBorder from '@mui/icons-material/LightbulbSharp';
+import Lightbulb from '@mui/icons-material/LightbulbOutlined';
+
 export default function Control() {
+    const [HAir, setAir] = useState(40);
+    const [HGnd, setGnd] = useState(19);
+    const [Temp, setTemp] = useState(20);
+    function handlerLight(){
+    }
     return(
     <div>
       <AppBar/>
-      <Typography fontSize="25" align="center" sx={{mt:"5"}}>SALA DE CONTROL</Typography>
+      <Typography fontSize="25" align="center" sx={{mt:"10",mb:"10"}}>SALA DE CONTROL</Typography>
       <Grid container sx={{ml:"7%", height: '80vh', width:"90%"}}>
         {/* Graficas de control*/}  
           <CssBaseline />
-          <Grid item lg={6} xs={false} sm={4} md={7} component={Paper} elevation={6} square
+          <Grid item lg={6} xs={false} sm={4} md={7} component={Paper} square
             sx={{
               backgroundImage: 'url(https://media.admagazine.com/photos/61de539e089751617cd2fc74/3:4/w_1058,h_1411,c_limit/plantas.jpg)',
               backgroundRepeat: 'no-repeat',
@@ -29,28 +38,28 @@ export default function Control() {
             }}
           />
           {/*Cuadro de control*/}
-          <Grid lg={6} component={Paper} elevation={6} square>
+          <Grid lg={6} xs={6} component={Paper}>
             <Grid container>
-              <Grid item lg={12} align="center" mt="10">
+              <Grid item lg={12} xs={12} align="center" mt="10">
                 <Typography component="h1" variant="h5">Panel de control</Typography>
               </Grid>
               {/*Humedad del aire*/}
-              <Grid item lg={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }}><RemoveIcon/></Button></Grid>
-              <Grid item lg={6} align="center" mt="10"><TextField margin="normal" fullWidth id="user" label="Humedad del aire"/></Grid>
-              <Grid item lg={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }}><AddIcon/></Button></Grid>
+              <Grid item lg={3} xs={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }} onClick={()=>setAir(HAir-1)}><RemoveIcon/></Button></Grid>
+              <Grid item lg={6} xs={6} align="center" mt="10"><TextField margin="normal" value={HAir} fullWidth  label="Humedad del aire" 
+                InputProps={{startAdornment: <InputAdornment position="start">%</InputAdornment>}}/></Grid>
+              <Grid item lg={3} xs={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }} onClick={()=>setAir(HAir+1)}><AddIcon/></Button></Grid>
               {/*Humedad del suelo*/}
-              <Grid item lg={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }}><RemoveIcon/></Button></Grid>
-              <Grid item lg={6} align="center" mt="10"><TextField margin="normal" fullWidth id="user" label="Humedad del suelo"/></Grid>
-              <Grid item lg={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }}><AddIcon/></Button></Grid>    
+              <Grid item lg={3} xs={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }} onClick={()=>setGnd(HGnd+1)}><RemoveIcon/></Button></Grid>
+              <Grid item lg={6} xs={6} align="center" mt="10"><TextField margin="normal" value={HGnd} fullWidth label="Humedad del suelo"
+                InputProps={{startAdornment: <InputAdornment position="start">%</InputAdornment>}}/></Grid>
+              <Grid item lg={3} xs={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }} onClick={()=>setGnd(HGnd+1)}><AddIcon/></Button></Grid>    
               {/*Temperatura*/}
-              <Grid item lg={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }}><RemoveIcon/></Button></Grid>
-              <Grid item lg={6} align="center" mt="10"><TextField margin="normal" fullWidth id="user" label="Temperatura"/></Grid>
-              <Grid item lg={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }}><AddIcon/></Button></Grid>    
-              {/*Luminosidad*/}
-              <Grid item lg={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }}><RemoveIcon/></Button></Grid>
-              <Grid item lg={6} align="center" mt="10"><TextField margin="normal" fullWidth id="user" label="Luminosidad"/></Grid>
-              <Grid item lg={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }}><AddIcon/></Button></Grid>        
-                
+              <Grid item lg={3} xs={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }} onClick={()=>setTemp(Temp+1)}><RemoveIcon/></Button></Grid>
+              <Grid item lg={6} xs={6} align="center" mt="10"><TextField margin="normal" value={Temp} fullWidth label="Temperatura"
+                InputProps={{startAdornment: <InputAdornment position="start">ºC</InputAdornment>}}/></Grid>
+              <Grid item lg={3} xs={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }} onClick={()=>setTemp(Temp+1)}><AddIcon/></Button></Grid>    
+              {/*Iluminación*/}
+              <Grid item lg={12} xs={12} align="center" mt="10"><Checkbox onChange={handlerLight} icon={<Lightbulb fontSize="large"/>} checkedIcon={<LightbulbBorder fontSize="large"/>} /></Grid>     
             </Grid>
           </Grid>
         </Grid>
