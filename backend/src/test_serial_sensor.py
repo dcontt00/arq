@@ -1,10 +1,9 @@
+#!/usr/bin/env python3
 import serial
-from time import sleep
-
-ser = serial.Serial ("/dev/serial0", 9600)    #Open port with baud rate
-while True:
-    received_data = ser.read()              #read serial port
-    sleep(0.03)
-    data_left = ser.inWaiting()             #check for remaining byte
-    received_data += ser.read(data_left)
-    print (received_data)                
+if __name__ == '__main__':
+    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+    ser.reset_input_buffer()
+    while True:
+        if ser.in_waiting > 0:
+            line = ser.readline().decode('utf-8').rstrip()
+            print(line)
