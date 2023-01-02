@@ -16,9 +16,9 @@ GPIO.setmode(GPIO.BCM)
 
 relay1 = Relay(4)
 relay2 = Relay(17)
-relay3 = Relay(27)
-soilMoisture1 = SoilMoisture(14)
-soilMoisture2 = SoilMoisture(15)
+#relay3 = Relay(27)
+soilMoisture1 = SoilMoisture(22)
+soilMoisture2 = SoilMoisture(24)
 dh11 = DHT11(18)
 light_sensor = LightSensor(23)
 
@@ -37,8 +37,6 @@ def toggle_relay(pin: int):
         status = relay1.toggle()
     elif pin == 2:
         status = relay2.toggle()
-    else:
-        status = relay3.toggle()
 
     return status
 
@@ -67,9 +65,8 @@ def get_data():
     temperature, humidity = dh11.read()
     soil_moisture1 = soilMoisture1.read()
     soil_moisture2 = soilMoisture2.read()
-    relay_1 = get_relay_data(relay1)
-    # relay_2 = relay2.status()
-    # relay_3 = relay3.status()
+    relay_1 = relay1.status()
+    relay_2 = relay2.status()
     light = light_sensor.read()
 
     """ (
