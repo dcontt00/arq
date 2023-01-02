@@ -4,9 +4,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
 import Paper from '@mui/material/Paper';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { createTheme, ThemeProvider} from '@mui/material/styles';
 
-const Item = styled(Paper)(({theme}) => ({color: theme.palette.text.secondary,}));
 const darkTheme = createTheme({ palette: { mode: 'dark' } });
 
 export default function ResponsiveAppBar() {

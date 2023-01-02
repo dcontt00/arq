@@ -9,7 +9,7 @@ export default function Camera() {
     return(
     <div>
       <AppBar/>
-      <Typography fontSize="25" align="center" sx={{mt:"5"}}>CONTROL VISUAL</Typography>
+      <Typography fontSize="25" align="center" sx={{mt:"10",mb:"10"}}>CONTROL VISUAL</Typography>
       <Grid container spacing={2} width={"99%"} sx={{mt:"5",ml:"5"}}>
         {/* Ultima foto del invernadero */}
         <Grid item lg={7}>
