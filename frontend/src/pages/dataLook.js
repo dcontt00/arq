@@ -3,9 +3,8 @@ import AppBar from "../components/Appbar";
 import Grid from "@mui/material/Grid";
 import {Typography} from "@mui/material";
 import Paper from '@mui/material/Paper';
-import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
-
+import { Bar} from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,9 +14,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Bar} from 'react-chartjs-2';
-import { styled } from '@mui/material/styles';
-
 
 ChartJS.register(
   CategoryScale,
@@ -51,7 +47,6 @@ export default function DataLook(){
    <div>
       <AppBar/>
       <Typography fontSize="25" align="center" sx={{mt:"10",mb:"10"}}>INFORMACIÓN BÁSICA</Typography>
-      <CssBaseline />
       <Grid container>
         {/* Grafica de los datos */}   
         <Grid item lg={5} component={Paper} sx={{ml:9,mr:10, mt:5}}>
