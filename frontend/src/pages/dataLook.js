@@ -2,9 +2,9 @@ import * as React from "react";
 import AppBar from "../components/Appbar";
 import Grid from "@mui/material/Grid";
 import {Typography} from "@mui/material";
-import Datos from "../components/Datos";
 import Paper from '@mui/material/Paper';
 import CssBaseline from '@mui/material/CssBaseline';
+import Stack from '@mui/material/Stack';
 
 import {
   Chart as ChartJS,
@@ -16,6 +16,9 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar} from 'react-chartjs-2';
+import { styled } from '@mui/material/styles';
+
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,7 +27,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
 
 export default function DataLook(){
   const data = {
@@ -50,14 +52,19 @@ export default function DataLook(){
       <AppBar/>
       <Typography fontSize="25" align="center" sx={{mt:"10",mb:"10"}}>INFORMACIÓN BÁSICA</Typography>
       <CssBaseline />
-      <Grid container >
+      <Grid container>
         {/* Grafica de los datos */}   
-        <Grid item lg={6} xs={false} sm={4} md={7} component={Paper} square>
+        <Grid item lg={5} component={Paper} sx={{ml:9,mr:10, mt:5}}>
           <Bar data={data} />
         </Grid>
-        {/* Tomar una foto */}
-        <Grid item lg={6} xs={6} component={Paper} square>
-          <Datos/>
+        {/* Datos */}
+        <Grid item lg={5} component={Paper} sx={{mt:5,backgroundColor:"lightGrey"}}>
+          <Stack spacing={2}  sx={{ml:2,mr:2}}>
+            <Paper sx={{mt:1.5}}><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Humedad del aire:</Typography></Paper>
+            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Temperatura:</Typography></Paper>
+            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Humedad del suelo:</Typography></Paper>
+            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Luminosidad:</Typography></Paper>
+          </Stack>
         </Grid>
       </Grid>
     </div>
