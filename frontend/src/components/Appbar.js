@@ -19,7 +19,7 @@ export default function ResponsiveAppBar() {
             <Typography variant="h7" fontWeight="700"><AdbIcon/>LOGIN</Typography>
           </Button>
         </Grid>
-        <Grid item lg={3}><Button href={"/data"} sx={{ my: 1, color: "white", display: "block" }}>Datos</Button></Grid>
+        <Grid item lg={3}><Button href={"/dataLook"} sx={{ my: 1, color: "white", display: "block" }}>Datos</Button></Grid>
         <Grid item lg={3}><Button href={"/control"} sx={{ my: 1, color: "white", display: "block" }}>Control</Button></Grid>
         <Grid item lg={3}><Button href={"/camera"} sx={{ my: 1, color: "white", display: "block" }}>Camara</Button></Grid>
       </Grid>
