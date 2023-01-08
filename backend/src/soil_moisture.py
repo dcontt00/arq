@@ -1,30 +1,24 @@
 import time
-import RPi.GPIO as GPIO
+import serial
 
 
 class SoilMoisture:
-    def __init__(self, pin) -> None:
-        self._pin = pin
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(pin, GPIO.IN)
+    def __init__(self) -> None:
+        self.ser = serial.Serial(port='/dev/serial0',baudrate=115200)
 
-    @property
-    def pin(self) -> int:
-        return self._pin
-
-    def read(self) -> int:
+    def read(self) -> list:
         """_summary_
 
         Returns:
            int: 0 is wet and 1 is dry
         """
-        return GPIO.input(self.pin)
+        moisture_read = self.ser.readline().decode("utf-8").rstrip().split("/")
+        moisture_read = [int(x) for x in moisture_read]
+        return moisture_read
 
     def read_str(self) -> str:
-        status = "Dry"
-        if self.read() == 0:
-            status = "Wet"
-        return f"Soil Moisture: {status}"
+        moisture_read = self.read()
+        return f"Soil Moisture 1: {moisture_read[1]}\n" + f"Soil Moisture 2: {moisture_read[2]}"
 
 
 def test_soil_moisture(pin):
