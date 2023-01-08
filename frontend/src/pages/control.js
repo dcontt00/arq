@@ -12,11 +12,12 @@ import planta from "../images/planta.jpeg";
 import Checkbox from '@mui/material/Checkbox';
 import LightbulbBorder from '@mui/icons-material/LightbulbSharp';
 import Lightbulb from '@mui/icons-material/LightbulbOutlined';
+import { lecturas } from '../components/lecturas';
 
 export default function Control() {
-    const [HAir, setAir] = useState(3);
-    const [HGnd, setGnd] = useState(19);
-    const [Temp, setTemp] = useState(20);
+    const [HAir, setAir] = useState(lecturas.hair);
+    const [HGnd, setGnd] = useState(lecturas.hgnd);
+    const [Temp, setTemp] = useState(lecturas.lum);
     function handlerLight(){
     }
 
@@ -24,9 +25,8 @@ export default function Control() {
     <div>
       <AppBar/>
       <Typography fontSize="25" align="center" sx={{mt:"10",mb:"10"}}>SALA DE CONTROL</Typography>
-      <Grid container sx={{ml:9, width:"90%"}}>
-        {/* Graficas de control*/}  
-          <Grid item lg={6} component={Paper} sx={{backgroundImage: `url(${planta})`}}/>
+      <Grid container sx={{ml:9,height:"60%", width:"80%"}}> 
+          <Grid item lg={6} component={Paper} square sx={{backgroundImage: `url(${planta})`}}/>
           {/*Cuadro de control*/}
           <Grid lg={6} xs={6} component={Paper} square>
             <Grid container>

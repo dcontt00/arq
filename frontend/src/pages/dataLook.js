@@ -5,6 +5,7 @@ import {Typography} from "@mui/material";
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { Bar} from 'react-chartjs-2';
+import {lecturas} from "../components/lecturas";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,10 +26,10 @@ ChartJS.register(
 );
 
 export default function DataLook(){
-  const hair = 100;
-  const hgnd = 75;
-  const temp = 20;
-  const lum = 40;
+  const hair = lecturas.hair;
+  const hgnd = lecturas.hgnd;
+  const temp = lecturas.temp;
+  const lum = lecturas.lum;
   const data = {
     labels:['Humedad del aire','Humedad del suelo','Temperatura','Luminosidad'],
     datasets:[{
