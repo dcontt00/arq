@@ -38,7 +38,7 @@ def toggle_relay(pin: int):
     elif pin == 2:
         status = pump.toggle()
     else:
-        status=ligth.toggle()
+        status=light.toggle()
 
     return status
 
