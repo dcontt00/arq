@@ -14,9 +14,9 @@ from logger import getLogger
 log = getLogger(__name__)
 GPIO.setmode(GPIO.BCM)
 
-relay1 = Relay(4)
-relay2 = Relay(17)
-#relay3 = Relay(27)
+fans = Relay(4) # id=1
+pump = Relay(17) # id=2
+light = Relay(27) # id=3
 soilMoisture1 = SoilMoisture(22)
 soilMoisture2 = SoilMoisture(24)
 dh11 = DHT11(18)
@@ -34,9 +34,11 @@ app = Flask(__name__)
 
 def toggle_relay(pin: int):
     if pin == 1:
-        status = relay1.toggle()
+        status = fans.toggle()
     elif pin == 2:
-        status = relay2.toggle()
+        status = pump.toggle()
+    else:
+        status=ligth.toggle()
 
     return status
 
@@ -65,9 +67,10 @@ def get_data():
     temperature, humidity = dh11.read()
     soil_moisture1 = soilMoisture1.read()
     soil_moisture2 = soilMoisture2.read()
-    relay_1 = relay1.status()
-    relay_2 = relay2.status()
-    light = light_sensor.read()
+    fans_status = fans.status()
+    pump_status = pump.status()
+    light_status=light.status()
+    light_sensor_value = light_sensor.read()
 
     """ (
         humidity,
@@ -85,10 +88,10 @@ def get_data():
         "humidity": humidity,
         "soil_moisture1": soil_moisture1,
         "soil_moisture2": soil_moisture2,
-        "relay1": relay_1,
-        # "relay2": relay_2,
-        # "relay3": relay_3,
-        "light": light,
+        "fans": fans_status,
+        "pump": pump_status,
+        "light": light_status,
+        "light_sensor": light_sensor_value,
     }
 
 
