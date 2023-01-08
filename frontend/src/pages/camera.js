@@ -13,7 +13,7 @@ export default function Camera() {
     return(
     <div>
       <AppBar/>
-      <Typography fontSize="25" align="center" sx={{mt:"10",mb:"10"}}>CONTROL VISUAL</Typography>
+      <Typography fontSize="25" align="center" sx={{mt:1,mb:1}}>CONTROL VISUAL</Typography>
       <Grid container>
         <Grid item lg={6} sx={{ml:5, mt:3}}>
           <Box align="center">

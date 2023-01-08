@@ -12,6 +12,7 @@ import planta from "../images/planta.jpeg";
 import Checkbox from '@mui/material/Checkbox';
 import LightbulbBorder from '@mui/icons-material/LightbulbSharp';
 import Lightbulb from '@mui/icons-material/LightbulbOutlined';
+import Box from '@mui/material/Box';
 import { lecturas } from '../components/lecturas';
 
 export default function Control() {
@@ -24,13 +25,24 @@ export default function Control() {
     return(
     <div>
       <AppBar/>
-      <Typography fontSize="25" align="center" sx={{mt:"10",mb:"10"}}>SALA DE CONTROL</Typography>
-      <Grid container sx={{ml:9,height:"60%", width:"80%"}}> 
-          <Grid item lg={6} component={Paper} square sx={{backgroundImage: `url(${planta})`}}/>
+      <Typography fontSize="25" align="center" sx={{mt:1,mb:1}}>SALA DE CONTROL</Typography>
+      <Grid container justifyContent="center"> 
+          <Grid item lg={5} component={Paper} bgcolor="#2E2E2E" align="center">
+            <Box  
+              sx={{
+                mt:1,
+                width:510,
+                height: 370,
+                borderRadius:"4px",
+                border:2,
+                borderColor:"white",
+                backgroundImage: `url(${planta})`
+              }}/>
+          </Grid>
           {/*Cuadro de control*/}
-          <Grid lg={6} xs={6} component={Paper} square>
+          <Grid lg={5} component={Paper} square>
             <Grid container>
-              <Grid item lg={12} xs={12} align="center" mt="10">
+              <Grid item lg={12} align="center" mt="10">
                 <Typography component="h1" variant="h5">Panel de control</Typography>
               </Grid>
               {/*Humedad del aire*/}
@@ -49,7 +61,7 @@ export default function Control() {
                 InputProps={{startAdornment: <InputAdornment position="start">ºC</InputAdornment>}}/></Grid>
               <Grid item lg={3} xs={3} align="center" mt="10"><Button sx={{ mt: 3, mb: 2 }} onClick={Temp<100 ? ()=>setTemp(Temp+1): undefined}><AddIcon/></Button></Grid>    
               {/*Iluminación*/}
-              <Grid item lg={12} xs={12} align="center" mt="10"><Checkbox onChange={handlerLight} icon={<Lightbulb fontSize="large"/>} checkedIcon={<LightbulbBorder fontSize="large"/>} /></Grid>     
+              <Grid item lg={12} marginBottom={2} align="center" mt="10"><Checkbox onChange={handlerLight} icon={<Lightbulb fontSize="large"/>} checkedIcon={<LightbulbBorder fontSize="large"/>} /></Grid>     
             </Grid>
           </Grid>
         </Grid>

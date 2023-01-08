@@ -15,6 +15,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { Box } from "@mui/system";
 
 ChartJS.register(
   CategoryScale,
@@ -51,14 +52,16 @@ export default function DataLook(){
   return(
    <div>
       <AppBar/>
-      <Typography fontSize="25" align="center" sx={{mt:"10",mb:"10"}}>INFORMACIÓN BÁSICA</Typography>
-      <Grid container>
+      <Typography fontSize="25" align="center" sx={{mt:1,mb:1}}>INFORMACIÓN BÁSICA</Typography>
+      <Grid container justifyContent="center">
         {/* Grafica de los datos */}   
-        <Grid item lg={5} component={Paper} sx={{ml:9,mr:10, mt:5}}>
-          <Bar data={data} />
+        <Grid item lg={5} component={Paper} sx={{mr:10, mt:7}}>
+          <Box>
+            <Bar data={data} />
+          </Box>
         </Grid>
         {/* Datos */}
-        <Grid item lg={5} component={Paper} sx={{mt:5,backgroundColor:"lightGrey"}}>
+        <Grid item lg={5} component={Paper} sx={{mt:7,backgroundColor:"lightGrey"}}>
           <Stack spacing={2}  sx={{ml:2,mr:2}}>
             <Paper sx={{mt:1.5}}><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Humedad del aire: {hair}</Typography></Paper>
             <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Temperatura: {hgnd}</Typography></Paper>
