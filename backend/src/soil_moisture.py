@@ -18,7 +18,7 @@ class SoilMoisture:
 
     def read_str(self) -> str:
         moisture_read = self.read()
-        return f"Soil Moisture 1: {moisture_read[1]}\n" + f"Soil Moisture 2: {moisture_read[2]}"
+        return f"Soil Moisture 1: {moisture_read[0]}\n" + f"Soil Moisture 2: {moisture_read[1]}"
 
 
 def test_soil_moisture(pin):

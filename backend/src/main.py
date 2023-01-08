@@ -17,8 +17,7 @@ GPIO.setmode(GPIO.BCM)
 fans = Relay(4) # id=1
 pump = Relay(17) # id=2
 light = Relay(27) # id=3
-soilMoisture1 = SoilMoisture(22)
-soilMoisture2 = SoilMoisture(24)
+soilMoisture = SoilMoisture()
 dh11 = DHT11(18)
 light_sensor = LightSensor(23)
 
@@ -65,8 +64,8 @@ def get_data():
             Example:{"temperature": 20.0,"humidity": 50.0,"soil_moisture": 0}
     """
     temperature, humidity = dh11.read()
-    soil_moisture1 = soilMoisture1.read()
-    soil_moisture2 = soilMoisture2.read()
+    soil_moisture1 = soilMoisture.read()[0]
+    soil_moisture2 = soilMoisture.read()[1]
     fans_status = fans.status()
     pump_status = pump.status()
     light_status=light.status()
