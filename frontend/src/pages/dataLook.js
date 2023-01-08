@@ -25,6 +25,10 @@ ChartJS.register(
 );
 
 export default function DataLook(){
+  const hair = 100;
+  const hgnd = 75;
+  const temp = 20;
+  const lum = 40;
   const data = {
     labels:['Humedad del aire','Humedad del suelo','Temperatura','Luminosidad'],
     datasets:[{
@@ -39,7 +43,7 @@ export default function DataLook(){
       borderWidth: 1,
       hoverBackgroundColor:'rgba(0,255,0,0.2)',
       hoverBorderColor:'#FF0000',
-      data: [100, 75, 20, 40]
+      data: [hair, hgnd, temp, lum]
     }] 
   };
 
@@ -55,10 +59,10 @@ export default function DataLook(){
         {/* Datos */}
         <Grid item lg={5} component={Paper} sx={{mt:5,backgroundColor:"lightGrey"}}>
           <Stack spacing={2}  sx={{ml:2,mr:2}}>
-            <Paper sx={{mt:1.5}}><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Humedad del aire:</Typography></Paper>
-            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Temperatura:</Typography></Paper>
-            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Humedad del suelo:</Typography></Paper>
-            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Luminosidad:</Typography></Paper>
+            <Paper sx={{mt:1.5}}><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Humedad del aire: {hair}</Typography></Paper>
+            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Temperatura: {hgnd}</Typography></Paper>
+            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Humedad del suelo: {temp}</Typography></Paper>
+            <Paper><Typography sx={{ml:5,mt:1.5,mb:1.5}}>Luminosidad: {lum}</Typography></Paper>
           </Stack>
         </Grid>
       </Grid>
