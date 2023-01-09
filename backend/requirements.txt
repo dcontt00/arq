@@ -1,3 +1,0 @@
-adafruit-circuitpython-dht
-flask
-pyserial
