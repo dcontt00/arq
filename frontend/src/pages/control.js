@@ -26,8 +26,8 @@ export default function Control() {
     <div>
       <AppBar/>
       <Typography fontSize="25" align="center" sx={{mt:1,mb:1}}>SALA DE CONTROL</Typography>
-      <Grid container justifyContent="center"> 
-          <Grid item lg={5} component={Paper} bgcolor="#2E2E2E" align="center">
+      <Grid container justifyContent="center" sx={{mt:7}}> 
+          <Grid item lg={5} component={Paper} bgcolor="#2E2E2E" align="center" >
             <Box  
               sx={{
                 mt:1,
