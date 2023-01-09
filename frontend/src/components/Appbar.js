@@ -1,96 +1,29 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import Paper from '@mui/material/Paper';
+import { createTheme, ThemeProvider} from '@mui/material/styles';
 
-const pages = ["Inicio", "Datos", "Control", "Cámara"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const darkTheme = createTheme({ palette: { mode: 'dark' } });
 
-function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
+export default function ResponsiveAppBar() {
+  
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <ThemeProvider theme={darkTheme}>
+    <Paper sx={{bgcolor: 'primary'}} square>
+      <Grid container spacing={1} sx={{width:"30%",ml:"10"}}>
+        <Grid item lg={3}>
+          <Button href={"/"} sx={{color: "white", display: "block" }}>
+            <Typography variant="h7" fontWeight="700"><AdbIcon/>LOGIN</Typography>
+          </Button>
+        </Grid>
+        <Grid item lg={3}><Button href={"/dataLook"} sx={{ my: 1, color: "white", display: "block" }}>Datos</Button></Grid>
+        <Grid item lg={3}><Button href={"/control"} sx={{ my: 1, color: "white", display: "block" }}>Control</Button></Grid>
+        <Grid item lg={3}><Button href={"/camera"} sx={{ my: 1, color: "white", display: "block" }}>Camara</Button></Grid>
+      </Grid>
+    </Paper>
+    </ThemeProvider>
   );
 }
-export default ResponsiveAppBar;
