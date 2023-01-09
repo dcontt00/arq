@@ -1,3 +1,4 @@
+
 import time
 import RPi.GPIO as GPIO
 
@@ -22,11 +23,11 @@ class LightSensor:
 
     def read_str(self) -> str:
         status = "No Light"
+        print(self.read())
         if self.read() == 0:
             status = "Light"
         return f"Light Sensor: {status}"
 
-
-def test_light_sensor(pin):
-    light_sensor = LightSensor(pin)
+if __name__=="__main__":
+    light_sensor = LightSensor(23)
     print("Light Sensor: " + light_sensor.read_str())

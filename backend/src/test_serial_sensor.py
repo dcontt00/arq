@@ -7,5 +7,6 @@ ser = serial.Serial(
 )
 
 while 1:
-    x = ser.readline()
-    print(x)
+	if (ser.in_waiting > 0):
+		x = ser.readline().decode('utf-8').rstrip()
+		print(x.split('/'))
