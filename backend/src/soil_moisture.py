@@ -14,13 +14,13 @@ class SoilMoisture:
         """
         moisture_read = self.ser.readline().decode("utf-8").rstrip().split("/")
         moisture_read = [int(x) for x in moisture_read]
+        moisture_read = [100-((x-250)/(650-250))*100 for x in moisture_read]
         return moisture_read
 
     def read_str(self) -> str:
         moisture_read = self.read()
         return f"Soil Moisture 1: {moisture_read[0]}\n" + f"Soil Moisture 2: {moisture_read[1]}"
 
-
-def test_soil_moisture(pin):
-    soil_moisture = SoilMoisture(pin)
+if __name__=="__main__":
+    soil_moisture = SoilMoisture()
     print("Soil Moisture: " + soil_moisture.read_str())
