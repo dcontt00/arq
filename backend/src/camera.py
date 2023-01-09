@@ -17,3 +17,10 @@ def save_picture() -> None:
 
     picam2.capture_file(PIC_PATH + f"{date}.jpg")
     return PIC_PATH + f"{date}.jpg"
+if __name__=="__main__":
+    picam2.start()
+    
+    np_array = picam2.capture_array()
+    print(np_array)
+    picam2.capture_file("demo.jpg")
+    picam2.stop()
