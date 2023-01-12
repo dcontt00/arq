@@ -64,7 +64,7 @@ export default function DataLook() {
 
   useEffect(() => {
     Axios({
-      url: "http://localhost:8000/historical",
+      url: "/api/historical",
     })
       .then((response) => {
 
@@ -111,7 +111,7 @@ export default function DataLook() {
       });
 
     Axios({
-      url: "http://localhost:8000/data",
+      url: "/api/data",
     })
       .then((response) => {
         setTemp(response.data.temperature)
