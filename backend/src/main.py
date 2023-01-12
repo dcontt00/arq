@@ -10,6 +10,9 @@ import time
 from relay import Relay
 import RPi.GPIO as GPIO
 from logger import getLogger
+import io
+from base64 import encodebytes
+from PIL import Image
 
 log = getLogger(__name__)
 GPIO.setmode(GPIO.BCM)
@@ -120,6 +123,19 @@ def get_image():
     os.system(f"libcamera-still --immediate -o {PIC_PATH}{date}.jpg")
 
     return send_file(PIC_PATH + f"{date}.jpg", mimetype="image/jpg")
+
+def get_response_image(image_path):
+    pil_img = Image.open(image_path, mode='r') # reads the PIL image
+    byte_arr = io.BytesIO()
+    pil_img.save(byte_arr, format='PNG') # convert the PIL image to byte array
+    encoded_img = encodebytes(byte_arr.getvalue()).decode('ascii') # encode as base64
+    return encoded_img
+
+@app.route("/images")
+def get_all_images():
+    images_list = os.listdir(PIC_PATH)
+    encoded_images = [get_response_image(x) for x in images_list]
+    return jsonify({'result': encoded_images})
 
 
 def periodic_data():
