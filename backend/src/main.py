@@ -68,9 +68,7 @@ def hello_world():
 
 @app.route("/", defaults={"path": ""})
 def serve(path):
-    if path != "" and os.path.exists("../frontend/build/" + path):
-        return send_file("../frontend/build/" + path)
-    else:
+    if "/api" not in path:
         return send_file("../../frontend/build/index.html")
 
 
