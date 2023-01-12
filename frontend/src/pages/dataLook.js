@@ -65,7 +65,7 @@ export default function DataLook() {
 
   async function getData() {
     const response = await axios.get("/api/data");
-    const data = await response.json();
+    const data = await response.data;
     console.log(data);
     setTemp(data.temperature);
     setHumidity(data.humidity);
@@ -73,7 +73,7 @@ export default function DataLook() {
     setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
 
     const response2 = await axios.get("/api/historical");
-    const data2 = await response2.json();
+    const data2 = await response2.data;
     console.log(data2);
     var temps = []
     var hums = []

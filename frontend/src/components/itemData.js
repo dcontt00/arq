@@ -6,7 +6,7 @@ function get_url(base64_img) {
 
 export async function getImageData() {
   const response = await axios.get("/api/images");
-  const data = await response.json();
+  const data = await response.data;
   var itemData = [];
   itemData = response.result.map((img_encoded, index) => ({ img: get_url(img_encoded), title: "" + index }));
   return itemData;
