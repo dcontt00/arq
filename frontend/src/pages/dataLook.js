@@ -67,6 +67,7 @@ export default function DataLook() {
       url: "/api/historical",
     })
       .then((response) => {
+        console.log(response.data)
 
         // Get an array of temperatures from an array of JSON objects
         var temps = []
