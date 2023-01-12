@@ -1,3 +1,4 @@
 adafruit-circuitpython-dht
 flask
 pyserial
+Pillow
