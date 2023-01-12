@@ -1,6 +1,7 @@
 import time
 from picamera2 import Picamera2
 import os
+from PIL import Image
 
 PIC_PATH = "../data/pics/"
 if not os.path.exists("../data/pics"):
@@ -16,11 +17,17 @@ def save_picture() -> None:
     picam2.start()
 
     picam2.capture_file(PIC_PATH + f"{date}.jpg")
+    im = Image.open(PIC_PATH + f"{date}.jpg")
+    im.rotate(180).save(PIC_PATH + f"{date}.jpg")
     return PIC_PATH + f"{date}.jpg"
-if __name__=="__main__":
+
+
+if __name__ == "__main__":
     picam2.start()
-    
+
     np_array = picam2.capture_array()
     print(np_array)
     picam2.capture_file("demo.jpg")
+    im = Image.open("demo.jpg")
+    im.rotate(180).save("demo.jpg")
     picam2.stop()
