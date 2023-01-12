@@ -19,6 +19,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import axios from "axios";
 
 ChartJS.register(
   CategoryScale,
@@ -62,64 +63,59 @@ export default function DataLook() {
   const [soil_moisture, setSoil_moisture] = useState(0);
 
 
+  async function getData() {
+    const response = await axios.get("/api/data");
+    const data = await response.json();
+    console.log(data);
+    setTemp(data.temperature);
+    setHumidity(data.humidity);
+    setLight(data.light);
+    setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
+
+    const response2 = await axios.get("/api/historical");
+    const data2 = await response2.json();
+    console.log(data2);
+    var temps = []
+    var hums = []
+    var soil_moistures = []
+    var dates = []
+    data2.forEach(element => {
+      temps.push(element.temp)
+      hums.push(element.humidity)
+      soil_moistures.push(element.soil_moisture)
+      dates.push(element.date)
+    }
+    );
+    var dat = {
+      labels: dates,
+      datasets: [{
+        label: 'Humedad del aire',
+        borderColor: 'rgb(0, 0, 255)',
+        backgroundColor: 'rgba(100, 100, 235)',
+        data: hums
+      }, {
+        label: 'Humedad del suelo',
+        borderColor: 'rgb(0, 255, 0)',
+        backgroundColor: 'rgba(100, 255, 100)',
+        data: soil_moistures
+      }, {
+        label: 'Temperatura',
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        data: temps
+      }, {
+        label: 'Iluminación',
+        borderColor: 'rgb(255, 255, 0)',
+        backgroundColor: 'rgba(255, 255, 100)',
+        data: [0, 1, 0, 0, 1]
+      }]
+    };
+    setDatos(dat);
+  }
+
   useEffect(() => {
-    Axios({
-      url: "/api/historical",
-    })
-      .then((response) => {
-        console.log(response.data)
 
-        // Get an array of temperatures from an array of JSON objects
-        var temps = []
-        var hums = []
-        var soil_moistures = []
-        var dates = []
-        response.data.forEach(element => {
-          temps.push(element.temp)
-          hums.push(element.humidity)
-          soil_moistures.push(element.soil_moisture)
-          dates.push(element.date)
-        });
-
-        var dat = {
-          labels: dates,
-          datasets: [{
-            label: 'Humedad del aire',
-            borderColor: 'rgb(0, 0, 255)',
-            backgroundColor: 'rgba(100, 100, 235)',
-            data: hums
-          }, {
-            label: 'Humedad del suelo',
-            borderColor: 'rgb(0, 255, 0)',
-            backgroundColor: 'rgba(100, 255, 100)',
-            data: soil_moistures
-          }, {
-            label: 'Temperatura',
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            data: temps
-          }, {
-            label: 'Iluminación',
-            borderColor: 'rgb(255, 255, 0)',
-            backgroundColor: 'rgba(255, 255, 100)',
-            data: [0, 1, 0, 0, 1]
-          }]
-        };
-        setDatos(dat);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    Axios({
-      url: "/api/data",
-    })
-      .then((response) => {
-        setTemp(response.data.temperature)
-        setHumidity(response.data.humidity)
-        setLight(response.data.light)
-        setSoil_moisture((response.data.soil_moisture1 + response.data.soil_moisture2) / 2)
-      }, [setDatos, setTemp, setHumidity, setLight, setSoil_moisture]);
+    getData();
   });
 
 

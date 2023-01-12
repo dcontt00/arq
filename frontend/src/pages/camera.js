@@ -1,6 +1,6 @@
 import * as React from "react";
 import AppBar from "../components/Appbar";
-import {Button, Typography} from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import AddPhoto from '@mui/icons-material/AddPhotoAlternateTwoTone';
 import Box from '@mui/material/Box';
 import planta from "../images/planta.jpeg";
@@ -10,24 +10,34 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { getImageData } from "../components/itemData";
 
 export default function Camera() {
-    return(
+  const [itemData, setItemData] = React.useState([]);
+  React.useEffect(() => {
+    getImageData().then((data) => {
+      setItemData(data);
+    });
+  }, []);
+
+
+
+
+  return (
     <div>
-      <AppBar/>
-      <Typography fontSize="25" align="center" sx={{mt:1,mb:1}}>CONTROL VISUAL</Typography>
+      <AppBar />
+      <Typography fontSize="25" align="center" sx={{ mt: 1, mb: 1 }}>CONTROL VISUAL</Typography>
       <Grid container>
-        <Grid item lg={6} sx={{ml:5, mt:3}}>
+        <Grid item lg={6} sx={{ ml: 5, mt: 3 }}>
           <Box align="center">
-            <img src={planta} alt="img" width="550px"/>
+            <img src={planta} alt="img" width="550px" />
           </Box>
-          <Box align="center" sx={{mt:1}}>
-            <Button sx={{backgroundColor:"green"}}>
-              <AddPhoto sx={{fontSize: 25}}/>
+          <Box align="center" sx={{ mt: 1 }}>
+            <Button sx={{ backgroundColor: "green" }}>
+              <AddPhoto sx={{ fontSize: 25 }} />
             </Button>
           </Box>
         </Grid>
-        <Grid item lg={5} sx={{mt:4}}>
+        <Grid item lg={5} sx={{ mt: 4 }}>
           <ImageList sx={{ width: 500, height: 340 }} cols={3} rowHeight={164}>
-            {getImageData().map((item) => (
+            {itemData.map((item) => (
               <ImageListItem key={item.img}>
                 <img
                   src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
@@ -36,10 +46,10 @@ export default function Camera() {
                   loading="lazy"
                 />
               </ImageListItem>
-              ))}
-              </ImageList>
-        </Grid>  
+            ))}
+          </ImageList>
+        </Grid>
       </Grid>
     </div>
-    );
+  );
 }
