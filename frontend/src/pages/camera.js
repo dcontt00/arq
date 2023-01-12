@@ -7,7 +7,7 @@ import planta from "../images/planta.jpeg";
 import Grid from "@mui/material/Grid";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { itemData } from "../components/itemData";
+import { getImageData } from "../components/itemData";
 
 export default function Camera() {
     return(
@@ -27,7 +27,7 @@ export default function Camera() {
         </Grid>
         <Grid item lg={5} sx={{mt:4}}>
           <ImageList sx={{ width: 500, height: 340 }} cols={3} rowHeight={164}>
-            {itemData.map((item) => (
+            {getImageData().map((item) => (
               <ImageListItem key={item.img}>
                 <img
                   src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
