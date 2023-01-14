@@ -61,6 +61,8 @@ export default function DataLook() {
   const [humidity, setHumidity] = useState(0);
   const [light, setLight] = useState(0);
   const [soil_moisture, setSoil_moisture] = useState(0);
+  const [lightState, setLightState] = useState(false);
+  const [seconds, setSeconds] = useState(0);
 
 
   async function getData() {
@@ -71,6 +73,7 @@ export default function DataLook() {
     setHumidity(data.humidity);
     setLight(data.light);
     setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
+    setLightState(data.light);
 
     const response2 = await axios.get("/api/data/historical");
     const data2 = await response2.data;
@@ -79,13 +82,24 @@ export default function DataLook() {
     var hums = []
     var soil_moistures = []
     var dates = []
-    data2.forEach(element => {
-      temps.push(element.temp)
-      hums.push(element.humidity)
-      soil_moistures.push(element.soil_moisture)
-      dates.push(element.date)
+    var light = []
+    if (data2.length > 0) {
+
+      data2.forEach(element => {
+        temps.push(element.temp)
+        hums.push(element.humidity)
+        soil_moistures.push(element.soil_moisture)
+        dates.push(element.date)
+        light.push(element.light)
+      }
+      );
+    } else {
+      temps.push(0, 10, 20, 30, 40)
+      hums.push(0, 10, 20, 30, 40)
+      soil_moistures.push(0, 10, 20, 30, 40)
+      dates.push("1/10", "2/10", "3/10", "4/10", "5/10")
+      light.push(0, 1, 0, 1, 0)
     }
-    );
     var dat = {
       labels: dates,
       datasets: [{
@@ -107,16 +121,26 @@ export default function DataLook() {
         label: 'Iluminación',
         borderColor: 'rgb(255, 255, 0)',
         backgroundColor: 'rgba(255, 255, 100)',
-        data: [0, 1, 0, 0, 1]
+        data: light
       }]
     };
     setDatos(dat);
   }
 
+  // Run every 30 seconds
   useEffect(() => {
-
-    getData();
+    const interval = setInterval(() => {
+      getData();
+      setSeconds(seconds => seconds + 1);
+    }, 30000);// 30 segundos
+    return () => clearInterval(interval);
   });
+
+
+  // Run just once
+  useEffect(() => {
+    getData();
+  }, []);
 
 
   return (

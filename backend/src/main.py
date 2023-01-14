@@ -10,23 +10,23 @@ from PIL import Image
 
 
 # Raspberry Libraries
-""" from picamera2 import Picamera2
+from picamera2 import Picamera2
 from dht11 import DHT11
 from light_sensor import LightSensor
 from soil_moisture import SoilMoisture
 from relay import Relay
-import RPi.GPIO as GPIO """
+import RPi.GPIO as GPIO
 
 
 log = getLogger(__name__)
-""" GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 
 fans = Relay(4)  # id=1
 pump = Relay(17)  # id=2
 light = Relay(27)  # id=3
 soilMoisture = SoilMoisture()
 dh11 = DHT11(18)
-light_sensor = LightSensor(23) """
+light_sensor = LightSensor(23)
 
 
 db = Database()
@@ -40,25 +40,25 @@ app = Flask(__name__, static_folder="../../frontend/build", static_url_path="/")
 
 def toggle_relay(pin: int):
     if pin == 1:
-        # status = fans.toggle()
-        status = 0
+        status = fans.toggle()
+        # status = 0
     elif pin == 2:
-        # status = pump.toggle()
-        status = 0
+        status = pump.toggle()
+        # status = 0
     else:
-        # status = light.toggle()
-        status = 0
+        status = light.toggle()
+        # status = 0
 
     return status
 
 
 def get_relay_data(pin):
-    """temp = GPIO.input(pin)
+    temp = GPIO.input(pin)
     status = "Off"
     if temp == GPIO.HIGH:
         status = "On"
-    return f"Relay: {status}" """
-    return f"Relay: test"
+    return f"Relay: {status}"
+    """ return f"Relay: test" """
 
 
 @app.route("/api")
@@ -80,21 +80,21 @@ def get_data():
         dict: containing temperature, humidity, soil_moisture.
             Example:{"temperature": 20.0,"humidity": 50.0,"soil_moisture": 0}
     """
-    """ temperature, humidity = dh11.read()
+    temperature, humidity = dh11.read()
     soil_moisture1 = soilMoisture.read()[0]
     soil_moisture2 = soilMoisture.read()[1]
     fans_status = fans.status()
     pump_status = pump.status()
     light_status = light.status()
-    light_sensor_value = light_sensor.read() """
+    light_sensor_value = light_sensor.read()
 
-    temperature, humidity = 0, 0
+    """ temperature, humidity = 0, 0
     soil_moisture1 = 0
     soil_moisture2 = 0
     fans_status = 0
     pump_status = 0
     light_status = 0
-    light_sensor_value = 0
+    light_sensor_value = 0 """
 
     return {
         "temperature": temperature,
@@ -154,9 +154,9 @@ def get_all_images():
 def periodic_data():
     """get data from sensors and add it to the database"""
     while True:
-        """temperature, humidity = dh11.read()
-        soil_moisture = soilMoisture.read()"""
-        temperature, humidity, soil_moisture = test_data()
+        temperature, humidity = dh11.read()
+        soil_moisture = soilMoisture.read()
+        """ temperature, humidity, soil_moisture = test_data() """
         db.add_data(temperature, humidity, soil_moisture)
         sleep(MINS_TO_UPDATE * 60)
 
@@ -170,5 +170,5 @@ if __name__ == "__main__":
     try:
         app.run(debug=True, port=8000)
     except KeyboardInterrupt:
-        # GPIO.cleanup()
+        GPIO.cleanup()
         pass
