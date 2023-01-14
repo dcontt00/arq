@@ -11,7 +11,7 @@ from PIL import Image
 
 # Raspberry Libraries
 from picamera2 import Picamera2
-from dht11 import DHT11
+from dht11_sensor import DHT11Sensor
 from light_sensor import LightSensor
 from soil_moisture import SoilMoisture
 from relay import Relay
@@ -25,7 +25,7 @@ fans = Relay(4)  # id=1
 pump = Relay(17)  # id=2
 light = Relay(27)  # id=3
 soilMoisture = SoilMoisture()
-dh11 = DHT11(18)
+dh11 = DHT11Sensor(18)
 light_sensor = LightSensor(23)
 
 
@@ -66,7 +66,7 @@ def hello_world():
     return {"message": "Hello World"}
 
 
-@app.route("/web", defaults={"path": ""})
+@app.route("/", defaults={"path": ""})
 def serve(path):
     if "/api" not in path:
         return send_file("../../frontend/build/index.html")
@@ -80,7 +80,7 @@ def get_data():
         dict: containing temperature, humidity, soil_moisture.
             Example:{"temperature": 20.0,"humidity": 50.0,"soil_moisture": 0}
     """
-    temperature, humidity = dh11.read()
+    humidity, temperature = dh11.read()
     soil_moisture1 = soilMoisture.read()[0]
     soil_moisture2 = soilMoisture.read()[1]
     fans_status = fans.status()
@@ -154,9 +154,9 @@ def get_all_images():
 def periodic_data():
     """get data from sensors and add it to the database"""
     while True:
-        """temperature, humidity = dh11.read()
-        soil_moisture = soilMoisture.read()"""
-        temperature, humidity, soil_moisture = test_data()
+        temperature, humidity = dh11.read()
+        soil_moisture = soilMoisture.read()
+        """ temperature, humidity, soil_moisture = test_data() """
         db.add_data(temperature, humidity, soil_moisture)
         sleep(MINS_TO_UPDATE * 60)
 

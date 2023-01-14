@@ -14,7 +14,7 @@ class Database:
             f = open(DB, "w+")
             f.close()
 
-        self.conn = self.create_connection(DB)
+        # self.conn = self.create_connection(DB)
         self.create_table()
         self.create_control_table()
 
@@ -41,7 +41,8 @@ class Database:
                                             soil_moisture real NOT NULL
                                         ); """
 
-        c = self.conn.cursor()
+        con = self.create_connection(DB)
+        c = con.cursor()
         c.execute(sql_create_table)
     
     def create_control_table(self):
@@ -69,16 +70,19 @@ class Database:
 
         data = [temperature, humidity, soil_moisture]
 
-        cur = self.conn.cursor()
+        con = self.create_connection(DB)
+        cur = con.cursor()
         cur.execute(sql, data)
-        self.conn.commit()
+        con.commit()
         log.info("Added data to database")
+        con.close()
 
     def get_data(self):
         """get data from the database"""
         sql = """ SELECT * FROM data """
 
-        cur = self.conn.cursor()
+        con = self.create_connection(DB)
+        cur = con.cursor()
         cur.execute(sql)
         rows = cur.fetchall()
         data = []
@@ -92,6 +96,8 @@ class Database:
                     "soil_moisture": row[4],
                 }
             )
+
+        con.close()
         return data
 
     def set_control_data(self, temperature, humidity, soil_moisture):
