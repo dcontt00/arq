@@ -11,7 +11,7 @@ from PIL import Image
 
 # Raspberry Libraries
 from picamera2 import Picamera2
-from dht11_sensor import DHT11Sensor
+from dht11 import DHT11
 from light_sensor import LightSensor
 from soil_moisture import SoilMoisture
 from relay import Relay
@@ -25,7 +25,7 @@ fans = Relay(4)  # id=1
 pump = Relay(17)  # id=2
 light = Relay(27)  # id=3
 soilMoisture = SoilMoisture()
-dh11 = DHT11Sensor(18)
+dh11 = DHT11(18)
 light_sensor = LightSensor(23)
 
 
