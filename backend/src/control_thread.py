@@ -73,5 +73,5 @@ class Control_thread():
                 light.off()
             else:
                 light.on()
-            print("Light Status: " + light.status)
+            print("Light Status: " + light.status())
             
