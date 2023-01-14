@@ -19,6 +19,7 @@ import {
   Legend,
 } from 'chart.js';
 import axios from "axios";
+import Container from '@mui/material/Container';
 
 ChartJS.register(
   CategoryScale,
@@ -28,6 +29,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend
+
 );
 
 export default function DataLook() {
@@ -144,8 +146,7 @@ export default function DataLook() {
 
 
   return (
-    <div>
-      <AppBar />
+    <Container>
       <Typography fontSize="25" align="center" sx={{ mt: 1, mb: 1 }}>INFORMACIÓN BÁSICA</Typography>
       <Grid container justifyContent="center">
         {/* Grafica de los datos */}
@@ -164,6 +165,6 @@ export default function DataLook() {
           </Stack>
         </Grid>
       </Grid>
-    </div>
+    </Container>
   );
 }
