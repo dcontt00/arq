@@ -1,33 +1,31 @@
-from dht11 import DHT11
-import RPi.GPIO as GPIO
+import time
+import board
+import adafruit_dht
 
 
 class DHT11Sensor:
     def __init__(self, pin: int) -> None:
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)
-        GPIO.cleanup()
+
         self.DHT_PIN = pin
-        self.sensor = DHT11(pin=self.DHT_PIN)
+        self._sensor = adafruit_dht.DHT11(board.D18)
 
     @property
     def sensor(self):
-        return self.sensor
+        return self._sensor
 
     def read(self):
-        result = self.sensor.read()
-        humidity = result.humidity
-        temperature = result.temperature
+        humidity = self.sensor.humidity
+        temperature = self.sensor.temperature
 
-        return temperature, humidity
+        return humidity, temperature
 
     def read_str(self):
-        result = self.sensor.read()
-        humidity = result.humidity
-        temperature = result.temperature
+        result = self.read()
+        temperature = result[1]
+        humidity = result[0]
         return "Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(temperature, humidity)
 
 
 if __name__ == "__main__":
-    dht11 = DHT11Sensor(18)
-    print("DHT11: " + dht11.read_str())
+    dht11_sensor = DHT11Sensor(18)
+    print("DHT11: " + dht11_sensor.read_str())
