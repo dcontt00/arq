@@ -42,7 +42,7 @@ class Control_thread():
                 fans.on()
             else:
                 fans.off()
-            print("Result: " + fans.status())
+            print("Result: %i"%(fans.status(),))
 
     def irrigation_function(self, name="irrigation_thread"):
         print("Running Thread: irrigation_thread")
