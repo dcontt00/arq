@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { getImageData } from "../components/itemData";
+import Container from '@mui/material/Container';
 
 export default function Camera() {
   const [itemData, setItemData] = React.useState([]);
@@ -21,8 +22,7 @@ export default function Camera() {
 
 
   return (
-    <div>
-      <AppBar />
+    <Container>
       <Typography fontSize="25" align="center" sx={{ mt: 1, mb: 1 }}>CONTROL VISUAL</Typography>
       <Grid container>
         <Grid item lg={6} sx={{ ml: 5, mt: 3 }}>
@@ -50,6 +50,6 @@ export default function Camera() {
           </ImageList>
         </Grid>
       </Grid>
-    </div>
+    </Container>
   );
 }

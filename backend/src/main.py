@@ -1,4 +1,11 @@
-from flask import Flask, jsonify, request, send_file, send_from_directory, render_template
+from flask import (
+    Flask,
+    jsonify,
+    request,
+    send_file,
+    send_from_directory,
+    render_template,
+)
 from time import sleep
 from database import Database
 import os
@@ -59,13 +66,13 @@ def hello_world():
     return {"message": "Hello World"}
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
 def serve(path):
-    if path != "" and os.path.exists(app.static_folder + '/' + path):
+    if path != "" and os.path.exists(app.static_folder + "/" + path):
         return send_from_directory(app.static_folder, path)
     else:
-        return send_from_directory(app.static_folder, 'index.html')
+        return send_from_directory(app.static_folder, "index.html")
 
 
 @app.route("/api/data", methods=["GET"])
@@ -149,7 +156,7 @@ def get_response_image(image_path):
 @app.route("/api/images")
 def get_all_images():
     images_list = os.listdir(PIC_PATH)
-    encoded_images = [get_response_image(x) for x in images_list]
+    encoded_images = [get_response_image(PIC_PATH + x) for x in images_list]
     return jsonify({"result": encoded_images})
 
 
