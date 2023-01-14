@@ -34,6 +34,7 @@ class Control_thread():
         fans = Relay(4)  # id=1
         dh11 = DHT11(18)
         while(True):
+            print("#temperature_thread")
             control_data = self.database.get_control_data()
             humidity, temperature = dh11.read()
             print("Input Data: Humidity=%f,  Temperature=%f"%(humidity, temperature))
@@ -49,6 +50,7 @@ class Control_thread():
         pump = Relay(17)  # id=2
         soilMoisture = SoilMoisture()
         while(True):
+            print("#irrigation_thread")
             control_data = self.database.get_control_data()
             soil_list = soilMoisture.read()
             avgMoisture = (soil_list[0] + soil_list[1])/2
@@ -69,6 +71,7 @@ class Control_thread():
         light = Relay(27)  # id=3
         light_sensor = LightSensor(23)
         while(True):
+            print("#light_thread")
             if(light_sensor.read()):
                 light.off()
             else:
