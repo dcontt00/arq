@@ -1,7 +1,7 @@
 import dht11
 
 
-class DHT11:
+class DHT11Sensor:
     def __init__(self, pin: int) -> None:
         self.DHT_PIN = pin
         self.sensor = dht11.DHT11(pin=pin)
@@ -25,5 +25,5 @@ class DHT11:
 
 
 if __name__ == "__main__":
-    dht11 = DHT11(18)
+    dht11 = DHT11Sensor(18)
     print("DHT11: " + dht11.read_str())
