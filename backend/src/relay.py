@@ -46,3 +46,8 @@ def test_relay(pin):
     sleep(3)
     relay.off()
     print("RELAY: Apagado")
+
+if __name__ == "__main__":
+    test_relay(4)
+    test_relay(17)
+    test_relay(27)
