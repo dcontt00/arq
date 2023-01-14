@@ -59,7 +59,7 @@ class Database:
         sql = """ INSERT INTO controlData(temperature, humidity, soil_moisture)
                 VALUES(?,?,?) """
 
-        data = [50.0, 50.0, 50.0]
+        data = [10.0, 20.0, 50.0]
         c.execute(sql, data)
         con.commit()
         con.close()
