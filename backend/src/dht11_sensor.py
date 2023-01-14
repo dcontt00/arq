@@ -20,7 +20,7 @@ class DHT11Sensor:
         humidity = result.humidity
         temperature = result.temperature
 
-        return humidity, temperature
+        return temperature, humidity
 
     def read_str(self):
         result = self.sensor.read()
