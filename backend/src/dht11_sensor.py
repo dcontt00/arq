@@ -1,10 +1,15 @@
 import dht11
+from dht11 import DHT11
+import RPi.GPIO as GPIO
 
 
 class DHT11Sensor:
     def __init__(self, pin: int) -> None:
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.cleanup()
         self.DHT_PIN = pin
-        self.sensor = dht11.DHT11(pin=pin)
+        self.sensor = DHT11(pin=self.DHT_PIN)
 
     @property
     def sensor(self):
