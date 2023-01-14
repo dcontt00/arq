@@ -17,14 +17,18 @@ import { lecturas } from '../components/lecturas';
 import { Stack } from '@mui/system';
 import Container from '@mui/material/Container';
 import axios from "axios";
-
+import { useEffect } from 'react';
 
 export default function Control() {
   const [temp, setTemp] = useState(0);
+  const [objTemp, setObjTemp] = useState(20);
+
   const [humidity, setHumidity] = useState(0);
-  const [light, setLight] = useState(0);
+  const [objHumidity, setObjHumidity] = useState(40);
+
   const [soil_moisture, setSoil_moisture] = useState(0);
-  const [lightState, setLightState] = useState(false);
+  const [objSoil_moisture, setObjSoil_moisture] = useState(40);
+
   const [seconds, setSeconds] = useState(0);
 
   async function getData() {
@@ -32,12 +36,17 @@ export default function Control() {
     const data = await response.data;
     setTemp(data.temperature);
     setHumidity(data.humidity);
-    setLight(data.light);
     setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
-    setLightState(data.light);
   }
 
-
+  // Run every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getData();
+      setSeconds(seconds => seconds + 1);
+    }, 30000);// 30 segundos
+    return () => clearInterval(interval);
+  });
   return (
     <Container>
       <Grid container spacing={2}>
@@ -48,46 +57,46 @@ export default function Control() {
         <Grid item lg={6}>
           <Typography variant="h4">Valor objetivo</Typography>
           <Stack direction="row">
-            <Button sx={{ mt: 3, mb: 2 }} onClick={humidity > 0 ? () => setHumidity(humidity - 1) : undefined}><RemoveIcon />
+            <Button sx={{ mt: 3, mb: 2 }} onClick={objHumidity > 0 ? () => setObjHumidity(objHumidity - 1) : undefined}><RemoveIcon />
             </Button>
             <TextField
               sx={{ mt: 1.5 }}
               label="Humedad del aire"
               type="number"
-              value={humidity}
+              value={objHumidity}
               InputProps={{ startAdornment: <InputAdornment position="start">%</InputAdornment> }}
-              defaultValue={humidity}
+              defaultValue={objHumidity}
             />
-            <Button sx={{ mt: 3, mb: 2 }} onClick={humidity < 100 ? () => setHumidity(humidity + 1) : undefined}><AddIcon />
+            <Button sx={{ mt: 3, mb: 2 }} onClick={objHumidity < 100 ? () => setObjHumidity(objHumidity + 1) : undefined}><AddIcon />
             </Button>
           </Stack>
 
           <Stack direction="row">
-            <Button sx={{ mt: 3, mb: 2 }} onClick={soil_moisture > 0 ? () => setSoil_moisture(soil_moisture - 1) : undefined}><RemoveIcon />
+            <Button sx={{ mt: 3, mb: 2 }} onClick={objSoil_moisture > 0 ? () => setObjSoil_moisture(objSoil_moisture - 1) : undefined}><RemoveIcon />
             </Button>
             <TextField
               sx={{ mt: 1.5 }}
               label="Humedad del suelo"
               type="number"
-              value={soil_moisture}
+              value={objSoil_moisture}
               InputProps={{ startAdornment: <InputAdornment position="start">%</InputAdornment> }}
-              defaultValue={soil_moisture}
+              defaultValue={objSoil_moisture}
             />
-            <Button sx={{ mt: 3, mb: 2 }} onClick={soil_moisture < 100 ? () => setSoil_moisture(soil_moisture + 1) : undefined}><AddIcon />
+            <Button sx={{ mt: 3, mb: 2 }} onClick={objSoil_moisture < 100 ? () => setObjSoil_moisture(objSoil_moisture + 1) : undefined}><AddIcon />
             </Button>
           </Stack>
           <Stack direction="row">
-            <Button sx={{ mt: 3, mb: 2 }} onClick={temp > 0 ? () => setTemp(temp - 1) : undefined}><RemoveIcon />
+            <Button sx={{ mt: 3, mb: 2 }} onClick={objTemp > 0 ? () => setObjTemp(objTemp - 1) : undefined}><RemoveIcon />
             </Button>
             <TextField
               sx={{ mt: 1.5 }}
               label="Temperatura"
               type="number"
-              value={temp}
+              value={objTemp}
               InputProps={{ startAdornment: <InputAdornment position="start">ºC</InputAdornment> }}
-              defaultValue={temp}
+              defaultValue={objTemp}
             />
-            <Button sx={{ mt: 3, mb: 2 }} onClick={temp < 100 ? () => setTemp(temp + 1) : undefined}><AddIcon />
+            <Button sx={{ mt: 3, mb: 2 }} onClick={objTemp < 100 ? () => setObjTemp(objTemp + 1) : undefined}><AddIcon />
             </Button>
           </Stack>
 
