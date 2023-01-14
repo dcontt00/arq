@@ -16,7 +16,7 @@ from light_sensor import LightSensor
 from soil_moisture import SoilMoisture
 from relay import Relay
 import RPi.GPIO as GPIO
-
+from control_thread import Control_thread
 
 log = getLogger(__name__)
 GPIO.setmode(GPIO.BCM)
@@ -30,6 +30,8 @@ light_sensor = LightSensor(23)
 
 
 db = Database()
+
+control_threads = Control_thread()
 
 MINS_TO_UPDATE = 1
 PIC_PATH = "../data/pics/"
