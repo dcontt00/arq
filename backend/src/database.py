@@ -128,4 +128,4 @@ class Database:
                     "soil_moisture": row[4],
                 }
             )
-        return data
+        return data[0]
