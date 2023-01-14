@@ -12,6 +12,7 @@ class SoilMoisture:
         Returns:
            int: 0 is wet and 1 is dry
         """
+        self.ser.write(b'\ 0x01')
         moisture_read = self.ser.readline().decode("utf-8").rstrip().split("/")
         moisture_read = [int(x) for x in moisture_read]
         moisture_read = [100-((x-250)/(650-250))*100 for x in moisture_read]
