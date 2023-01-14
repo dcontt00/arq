@@ -4,7 +4,7 @@ import dht11
 class DHT11:
     def __init__(self, pin: int) -> None:
         self.DHT_PIN = pin
-        self.sensor = dht11.DHT11(pin=14)
+        self.sensor = dht11.DHT11(pin=pin)
 
     @property
     def sensor(self):
