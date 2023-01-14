@@ -1,4 +1,3 @@
-import dht11
 from dht11 import DHT11
 import RPi.GPIO as GPIO
 
