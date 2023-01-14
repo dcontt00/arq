@@ -115,7 +115,7 @@ class Database:
 
     def get_control_data(self):
         """get data from the database"""
-        sql = """ SELECT * FROM controlData WHERE id=0 """
+        sql = """ SELECT * FROM controlData"""
 
         con = self.create_connection(DB)
         cur = con.cursor()
@@ -126,10 +126,9 @@ class Database:
             data.append(
                 {
                     "id": row[0],
-                    "date": row[1],
-                    "temperature": row[2],
-                    "humidity": row[3],
-                    "soil_moisture": row[4],
+                    "temperature": row[1],
+                    "humidity": row[2],
+                    "soil_moisture": row[3],
                 }
             )
         return data[0]
