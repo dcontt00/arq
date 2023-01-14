@@ -61,7 +61,7 @@ class Database:
 
         data = [50.0, 50.0, 50.0]
         c.execute(sql, data)
-        self.conn.commit()
+        con.commit()
         con.close()
 
     def add_data(self, temperature, humidity, soil_moisture):
@@ -105,10 +105,12 @@ class Database:
         sql = """ UPDATE controlData SET temperature=%f, humidity=%f, soil_moisture=%f WHERE id=%d """
 
         data = (temperature, humidity, soil_moisture, 0)
+        con = self.create_connection(DB)
+        cur = con.cursor()
 
-        cur = self.conn.cursor()
         cur.execute(sql, data)
-        self.conn.commit()
+        con.commit()
+        con.close()
         log.info("Added data to database")
 
     def get_control_data(self):
