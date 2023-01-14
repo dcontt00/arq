@@ -44,7 +44,7 @@ class Database:
         con = self.create_connection(DB)
         c = con.cursor()
         c.execute(sql_create_table)
-    
+
     def create_control_table(self):
         sql_create_table = """ CREATE TABLE IF NOT EXISTS controlData (
                                             id integer PRIMARY KEY,
@@ -53,7 +53,8 @@ class Database:
                                             soil_moisture real NOT NULL
                                         ); """
 
-        c = self.conn.cursor()
+        con = self.create_connection(DB)
+        c = con.cursor()
         c.execute(sql_create_table)
         sql = """ INSERT INTO controlData(temperature, humidity, soil_moisture)
                 VALUES(?,?,?) """
@@ -61,7 +62,7 @@ class Database:
         data = [50.0, 50.0, 50.0]
         c.execute(sql, data)
         self.conn.commit()
-
+        con.close()
 
     def add_data(self, temperature, humidity, soil_moisture):
         """add data to the database"""
