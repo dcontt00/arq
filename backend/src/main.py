@@ -52,20 +52,6 @@ def toggle_relay(pin: int):
     return status
 
 
-def get_relay_data(pin):
-    """Gets data from all sensors
-    0 = off
-    1 = on
-
-    """
-    temp = GPIO.input(pin)
-    status = 0
-    if temp == GPIO.HIGH:
-        status = 1
-    return status
-    """ return f"Relay: test" """
-
-
 @app.route("/api")
 def hello_world():
     return {"message": "Hello World"}

@@ -33,10 +33,10 @@ class Relay:
         return GPIO.input(self.pin) == GPIO.HIGH
 
     def status(self) -> str:
-        status = "Off"
+        status = 0
         if self.is_on():
-            status = "On"
-        return f"Relay: {status}"
+            status = 1
+        return status
 
 
 def test_relay(pin):
