@@ -80,7 +80,7 @@ def get_data():
         dict: containing temperature, humidity, soil_moisture.
             Example:{"temperature": 20.0,"humidity": 50.0,"soil_moisture": 0}
     """
-    temperature, humidity = dh11.read()
+    humidity, temperature = dh11.read()
     soil_moisture1 = soilMoisture.read()[0]
     soil_moisture2 = soilMoisture.read()[1]
     fans_status = fans.status()
