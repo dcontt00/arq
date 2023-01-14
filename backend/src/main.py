@@ -53,11 +53,16 @@ def toggle_relay(pin: int):
 
 
 def get_relay_data(pin):
+    """Gets data from all sensors
+    0 = off
+    1 = on
+
+    """
     temp = GPIO.input(pin)
-    status = "Off"
+    status = 0
     if temp == GPIO.HIGH:
-        status = "On"
-    return f"Relay: {status}"
+        status = 1
+    return status
     """ return f"Relay: test" """
 
 
