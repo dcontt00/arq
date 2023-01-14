@@ -8,7 +8,6 @@ import { Line } from 'react-chartjs-2';
 import { lecturas } from "../components/lecturas";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import Axios from "axios";
 import {
   Chart as ChartJS,
   CategoryScale,
