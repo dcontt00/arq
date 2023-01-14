@@ -115,7 +115,7 @@ class Database:
 
     def get_control_data(self):
         """get data from the database"""
-        sql = """ SELECT * FROM controlData WHERE id=0 """
+        sql = """ SELECT * FROM controlData"""
 
         con = self.create_connection(DB)
         cur = con.cursor()
