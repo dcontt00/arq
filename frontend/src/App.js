@@ -12,11 +12,13 @@ import Data from "./pages/dataLook";
 import Control from "./pages/control";
 import Camera from "./pages/camera";
 import "./App.css";
+import Appbar from "./components/Appbar";
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
+        <Appbar />
         <Routes>
           <Route path="/" element={<Navigate to="/login" />}></Route>
           <Route path="/login" element={<Login />}></Route>
