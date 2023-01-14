@@ -20,7 +20,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/login" />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/dataLook" element={<Data />}></Route>
+          <Route path="/data" element={<Data />}></Route>
           <Route path="/control" element={<Control />}></Route>
           <Route path="/camera" element={<Camera />}></Route>
         </Routes>

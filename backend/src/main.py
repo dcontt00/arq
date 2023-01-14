@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, send_file
+from flask import Flask, jsonify, request, send_file, send_from_directory, render_template
 from time import sleep
 from database import Database
 import os
@@ -11,7 +11,7 @@ from PIL import Image
 
 # Raspberry Libraries
 from picamera2 import Picamera2
-from dht11_sensor import DHT11Sensor
+from dht11 import DHT11
 from light_sensor import LightSensor
 from soil_moisture import SoilMoisture
 from relay import Relay
@@ -25,7 +25,7 @@ fans = Relay(4)  # id=1
 pump = Relay(17)  # id=2
 light = Relay(27)  # id=3
 soilMoisture = SoilMoisture()
-dh11 = DHT11Sensor(18)
+dh11 = DHT11(18)
 light_sensor = LightSensor(23)
 
 
@@ -35,7 +35,7 @@ MINS_TO_UPDATE = 1
 PIC_PATH = "../data/pics/"
 if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
-app = Flask(__name__, static_folder="../../frontend/build", static_url_path="/")
+app = Flask(__name__, static_folder="../../frontend/build")
 
 
 def toggle_relay(pin: int):
@@ -52,24 +52,18 @@ def toggle_relay(pin: int):
     return status
 
 
-def get_relay_data(pin):
-    temp = GPIO.input(pin)
-    status = "Off"
-    if temp == GPIO.HIGH:
-        status = "On"
-    return f"Relay: {status}"
-    """ return f"Relay: test" """
-
-
 @app.route("/api")
 def hello_world():
     return {"message": "Hello World"}
 
 
-@app.route("/", defaults={"path": ""})
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
 def serve(path):
-    if "/api" not in path:
-        return send_file("../../frontend/build/index.html")
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 
 @app.route("/api/data", methods=["GET"])
@@ -81,13 +75,19 @@ def get_data():
             Example:{"temperature": 20.0,"humidity": 50.0,"soil_moisture": 0}
     """
     humidity, temperature = dh11.read()
+    print(0)
     soil_moisture1 = soilMoisture.read()[0]
+    print(1)
     soil_moisture2 = soilMoisture.read()[1]
+    print(2)
     fans_status = fans.status()
+    print(3)
     pump_status = pump.status()
+    print(4)
     light_status = light.status()
+    print(5)
     light_sensor_value = light_sensor.read()
-
+    print(6)
     """ temperature, humidity = 0, 0
     soil_moisture1 = 0
     soil_moisture2 = 0
@@ -115,7 +115,7 @@ def post_relay_toggle():
     id = int(data["id"])
     status = toggle_relay(id)
 
-    return {"message": f"Relay {id} is {status}"}
+    return {"message": status}
 
 
 @app.route("/api/data/historical")

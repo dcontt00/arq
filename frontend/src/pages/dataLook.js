@@ -66,6 +66,7 @@ export default function DataLook() {
 
 
   async function getData() {
+    console.log("Getting data...")
     const response = await axios.get("/api/data");
     const data = await response.data;
     console.log(data);

@@ -5,7 +5,7 @@ import adafruit_dht
 class DHT11:
     def __init__(self, pin: int) -> None:
         self.DHT_PIN = pin
-        self.sensor = adafruit_dht.DHT11(board.D18)
+        self.sensor = adafruit_dht.DHT11(board.D18, use_pulseio=False )
 
     def read(self):
         temperature = self.sensor.temperature

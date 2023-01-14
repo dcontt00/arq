@@ -21,10 +21,10 @@ class Relay:
     def toggle(self) -> None:
         if self.is_off():
             self.on()
-            return "On"
+            return 1
         else:
             self.off()
-            return "Off"
+            return 0
 
     def is_on(self) -> bool:
         return GPIO.input(self.pin) == GPIO.LOW
@@ -33,10 +33,10 @@ class Relay:
         return GPIO.input(self.pin) == GPIO.HIGH
 
     def status(self) -> str:
-        status = "Off"
+        status = 0
         if self.is_on():
-            status = "On"
-        return f"Relay: {status}"
+            status = 1
+        return status
 
 
 def test_relay(pin):
@@ -46,3 +46,9 @@ def test_relay(pin):
     sleep(3)
     relay.off()
     print("RELAY: Apagado")
+
+
+if __name__ == "__main__":
+    test_relay(4)
+    test_relay(17)
+    test_relay(27)
