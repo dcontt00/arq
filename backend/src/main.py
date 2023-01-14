@@ -126,7 +126,7 @@ def post_relay_toggle():
     id = int(data["id"])
     status = toggle_relay(id)
 
-    return {"message": f"Relay {id} is {status}"}
+    return {"message": status}
 
 
 @app.route("/api/data/historical")
