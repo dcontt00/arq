@@ -16,6 +16,7 @@ class Database:
 
         self.conn = self.create_connection(DB)
         self.create_table()
+        self.create_control_table()
 
     def create_connection(self, db_file):
         """create a database connection to a SQLite database"""
@@ -37,11 +38,29 @@ class Database:
                                             date datetime DEFAULT CURRENT_TIMESTAMP,
                                             temperature real NOT NULL,
                                             humidity real NOT NULL,
-                                            soil_moisture integer NOT NULL
+                                            soil_moisture real NOT NULL
                                         ); """
 
         c = self.conn.cursor()
         c.execute(sql_create_table)
+    
+    def create_control_table(self):
+        sql_create_table = """ CREATE TABLE IF NOT EXISTS controlData (
+                                            id integer PRIMARY KEY,
+                                            temperature real NOT NULL,
+                                            humidity real NOT NULL,
+                                            soil_moisture real NOT NULL
+                                        ); """
+
+        c = self.conn.cursor()
+        c.execute(sql_create_table)
+        sql = """ INSERT INTO controlData(temperature, humidity, soil_moisture)
+                VALUES(?,?,?) """
+
+        data = [50.0, 50.0, 50.0]
+        c.execute(sql, data)
+        self.conn.commit()
+
 
     def add_data(self, temperature, humidity, soil_moisture):
         """add data to the database"""
@@ -58,6 +77,36 @@ class Database:
     def get_data(self):
         """get data from the database"""
         sql = """ SELECT * FROM data """
+
+        cur = self.conn.cursor()
+        cur.execute(sql)
+        rows = cur.fetchall()
+        data = []
+        for row in rows:
+            data.append(
+                {
+                    "id": row[0],
+                    "date": row[1],
+                    "temperature": row[2],
+                    "humidity": row[3],
+                    "soil_moisture": row[4],
+                }
+            )
+        return data
+
+    def set_control_data(self, temperature, humidity, soil_moisture):
+        sql = """ UPDATE controlData SET temperature=%f, humidity=%f, soil_moisture=%f WHERE id=%d """
+
+        data = (temperature, humidity, soil_moisture, 0)
+
+        cur = self.conn.cursor()
+        cur.execute(sql, data)
+        self.conn.commit()
+        log.info("Added data to database")
+
+    def get_control_data(self):
+        """get data from the database"""
+        sql = """ SELECT * FROM controlData WHERE id=0 """
 
         cur = self.conn.cursor()
         cur.execute(sql)
