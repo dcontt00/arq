@@ -18,11 +18,11 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path="/web/" element={<Navigate to="/web/login" />}></Route>
-          <Route path="/web/login" element={<Login />}></Route>
-          <Route path="/web/dataLook" element={<Data />}></Route>
-          <Route path="/web/control" element={<Control />}></Route>
-          <Route path="/web/camera" element={<Camera />}></Route>
+          <Route path="/" element={<Navigate to="/login" />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/dataLook" element={<Data />}></Route>
+          <Route path="/control" element={<Control />}></Route>
+          <Route path="/camera" element={<Camera />}></Route>
         </Routes>
       </Router>
     </ThemeProvider>

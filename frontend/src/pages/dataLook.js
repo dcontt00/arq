@@ -72,7 +72,7 @@ export default function DataLook() {
     setLight(data.light);
     setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
 
-    const response2 = await axios.get("/api/historical");
+    const response2 = await axios.get("/api/data/historical");
     const data2 = await response2.data;
     console.log(data2);
     var temps = []
