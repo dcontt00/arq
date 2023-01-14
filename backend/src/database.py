@@ -61,7 +61,7 @@ class Database:
 
         data = [50.0, 50.0, 50.0]
         c.execute(sql, data)
-        self.conn.commit()
+        con.commit()
         con.close()
 
     def add_data(self, temperature, humidity, soil_moisture):
