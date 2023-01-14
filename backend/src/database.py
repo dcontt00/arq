@@ -117,7 +117,8 @@ class Database:
         """get data from the database"""
         sql = """ SELECT * FROM controlData WHERE id=0 """
 
-        cur = self.conn.cursor()
+        con = self.create_connection(DB)
+        cur = con.cursor()
         cur.execute(sql)
         rows = cur.fetchall()
         data = []
