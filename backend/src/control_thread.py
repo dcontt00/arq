@@ -16,7 +16,7 @@ class Control_thread():
     def __init__(self) -> None:
         self.database = Database()
         self.temp_thread = threading.Thread(target=self.temp_function, args=(self,), daemon="true")
-        self.irrig_thread = threading.Thread(target=self.irrig_function, args=(self,), daemon="true")
+        self.irrig_thread = threading.Thread(target=self.irrigation_function, args=(self,), daemon="true")
         self.light_thread = threading.Thread(target=self.light_function, args=(self,), daemon="true")
         self.temp_thread.start()
         self.irrig_thread.start()
