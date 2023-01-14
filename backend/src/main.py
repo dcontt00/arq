@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, send_file
+from flask import Flask, jsonify, request, send_file, send_from_directory, render_template
 from time import sleep
 from database import Database
 import os
@@ -16,7 +16,7 @@ from light_sensor import LightSensor
 from soil_moisture import SoilMoisture
 from relay import Relay
 import RPi.GPIO as GPIO
-
+from control_thread import Control_thread
 
 log = getLogger(__name__)
 GPIO.setmode(GPIO.BCM)
@@ -31,11 +31,13 @@ light_sensor = LightSensor(23)
 
 db = Database()
 
+control_threads = Control_thread()
+
 MINS_TO_UPDATE = 1
 PIC_PATH = "../data/pics/"
 if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
-app = Flask(__name__, static_folder="../../frontend/build", static_url_path="/")
+app = Flask(__name__, static_folder="../../frontend/build")
 
 
 def toggle_relay(pin: int):
@@ -57,10 +59,13 @@ def hello_world():
     return {"message": "Hello World"}
 
 
-@app.route("/", defaults={"path": ""})
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
 def serve(path):
-    if "/api" not in path:
-        return send_file("../../frontend/build/index.html")
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 
 @app.route("/api/data", methods=["GET"])
