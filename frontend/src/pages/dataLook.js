@@ -50,11 +50,6 @@ export default function DataLook() {
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
       data: [0, 0]
-    }, {
-      label: 'Iluminación',
-      borderColor: 'rgb(255, 255, 0)',
-      backgroundColor: 'rgba(255, 255, 100)',
-      data: [0, 0]
     }]
   });
 
@@ -62,7 +57,6 @@ export default function DataLook() {
   const [humidity, setHumidity] = useState(0);
   const [light, setLight] = useState(0);
   const [soil_moisture, setSoil_moisture] = useState(0);
-  const [lightState, setLightState] = useState(false);
   const [seconds, setSeconds] = useState(0);
 
 
@@ -73,9 +67,7 @@ export default function DataLook() {
     console.log(data);
     setTemp(data.temperature);
     setHumidity(data.humidity);
-    setLight(data.light);
     setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
-    setLightState(data.light);
 
     const response2 = await axios.get("/api/data/historical");
     const data2 = await response2.data;
@@ -119,12 +111,8 @@ export default function DataLook() {
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
         data: temps
-      }, {
-        label: 'Iluminación',
-        borderColor: 'rgb(255, 255, 0)',
-        backgroundColor: 'rgba(255, 255, 100)',
-        data: light
-      }]
+      }
+      ]
     };
     setDatos(dat);
   }
@@ -147,17 +135,17 @@ export default function DataLook() {
 
   return (
     <Container>
-      <Typography fontSize="25" align="center" sx={{ mt: 1, mb: 1 }}>INFORMACIÓN BÁSICA</Typography>
-      <Grid container justifyContent="center">
+      <Typography variant="h3">INFORMACIÓN BÁSICA</Typography>
+      <Grid container justifyContent="center" spacing={2}>
         {/* Grafica de los datos */}
-        <Grid item lg={5} component={Paper} sx={{ mr: 10, mt: 7 }}>
+        <Grid item lg={9} component={Paper} >
           <Box>
             <Line data={datos} />
           </Box>
         </Grid>
         {/* Datos */}
-        <Grid item lg={5} component={Paper} sx={{ mt: 7, backgroundColor: "lightGrey" }}>
-          <Stack spacing={2} sx={{ ml: 2, mr: 2 }}>
+        <Grid item lg={3} component={Paper} >
+          <Stack spacing={2} >
             <Paper sx={{ mt: 1.5 }}><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Humedad del aire: {humidity}</Typography></Paper>
             <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Temperatura: {temp}</Typography></Paper>
             <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Humedad del suelo: {soil_moisture}</Typography></Paper>
