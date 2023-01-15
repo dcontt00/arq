@@ -145,7 +145,7 @@ export default function DataLook() {
         </Grid>
         {/* Datos */}
         <Grid item lg={3} component={Paper} >
-          <Stack spacing={2} sx={{ ml: 2, mr: 2 }}>
+          <Stack spacing={2} >
             <Paper sx={{ mt: 1.5 }}><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Humedad del aire: {humidity}</Typography></Paper>
             <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Temperatura: {temp}</Typography></Paper>
             <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Humedad del suelo: {soil_moisture}</Typography></Paper>
