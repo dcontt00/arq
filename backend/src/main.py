@@ -163,8 +163,7 @@ def get_response_image(image_path):
 @app.route("/api/images")
 def get_all_images():
     images_list = os.listdir(PIC_PATH)
-    encoded_images = [get_response_image(PIC_PATH + x) for x in images_list]
-    return jsonify({"result": encoded_images})
+    return {"data": images_list}
 
 
 def periodic_data():
