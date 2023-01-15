@@ -135,22 +135,26 @@ export default function DataLook() {
 
   return (
     <Container>
-      <Typography variant="h3">INFORMACIÓN BÁSICA</Typography>
-      <Grid container justifyContent="center" spacing={2}>
+      <Grid container spacing={2}>
+        <Grid item lg={12} >
+          <Typography variant="h3">INFORMACIÓN BÁSICA</Typography>
+        </Grid>
         {/* Grafica de los datos */}
-        <Grid item lg={9} component={Paper} >
-          <Box>
+        <Grid item lg={9}  >
+          <Paper>
             <Line data={datos} />
-          </Box>
+          </Paper>
         </Grid>
         {/* Datos */}
-        <Grid item lg={3} component={Paper} >
-          <Stack spacing={2} >
-            <Paper sx={{ mt: 1.5 }}><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Humedad del aire: {humidity}</Typography></Paper>
-            <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Temperatura: {temp}</Typography></Paper>
-            <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Humedad del suelo: {soil_moisture}</Typography></Paper>
-            <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Luminosidad: {light}</Typography></Paper>
-          </Stack>
+        <Grid item lg={3}  >
+          <Paper>
+            <Stack spacing={2} >
+              <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Humedad del aire: {humidity}</Typography></Paper>
+              <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Temperatura: {temp}</Typography></Paper>
+              <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Humedad del suelo: {soil_moisture}</Typography></Paper>
+              <Paper><Typography sx={{ ml: 5, mt: 1.5, mb: 1.5 }}>Luminosidad: {light}</Typography></Paper>
+            </Stack>
+          </Paper>
         </Grid>
       </Grid>
     </Container>
