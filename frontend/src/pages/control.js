@@ -17,6 +17,7 @@ import { lecturas } from '../components/lecturas';
 import { Stack } from '@mui/system';
 import Container from '@mui/material/Container';
 import axios from "axios";
+import { CircularProgress } from '@mui/material';
 import { useEffect } from 'react';
 
 export default function Control() {
@@ -39,16 +40,16 @@ export default function Control() {
     setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
   }
 
-  async function getControlData(){
+  async function getControlData() {
     const response = await axios.get("/api/control/data");
     const data = await response.data;
     setObjTemp(data.temperature);
     setObjHumidity(data.humidity);
-    setObjSoil_moisture(data.soil_moisture); 
+    setObjSoil_moisture(data.soil_moisture);
   }
 
   async function handleSubmit(event) {
-    axios.post("/api/control", { "temperature": objTemp, "humidity": objHumidity, "soil_moisture": objSoil_moisture})
+    axios.post("/api/control", { "temperature": objTemp, "humidity": objHumidity, "soil_moisture": objSoil_moisture })
   }
 
   useEffect(()=>{
@@ -115,11 +116,11 @@ export default function Control() {
           <Paper>
             <Stack direction="column">
               <Typography >Humedad del aire</Typography>
-              <Typography >{humidity}%</Typography>
+              {humidity !== 0 ? <Typography >{humidity}%</Typography> : <CircularProgress />}
               <Typography >Humedad del suelo</Typography>
-              <Typography >{soil_moisture}%</Typography>
+              {soil_moisture !== 0 ? <Typography >{soil_moisture}%</Typography> : <CircularProgress />}
               <Typography >Temperatura</Typography>
-              <Typography >{temp}ºC</Typography>
+              {temp !== 0 ? <Typography >{temp}ºC</Typography> : <CircularProgress />}
             </Stack>
           </Paper>
         </Grid>
