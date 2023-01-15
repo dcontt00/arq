@@ -6,6 +6,9 @@ from flask import (
     send_from_directory,
     render_template,
 )
+from flask_cors import CORS
+
+
 from time import sleep
 from database import Database
 import os
@@ -44,7 +47,9 @@ MINS_TO_UPDATE = 1
 PIC_PATH = "../data/pics/"
 if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
+    
 app = Flask(__name__, static_folder="../../frontend/build")
+CORS(app)
 
 
 def toggle_relay(pin: int):
@@ -141,14 +146,16 @@ def get_historical_data():
 def get_image():
     date = time.strftime("%Y-%m-%d_%H:%M:%S")
     os.system(f"libcamera-still --immediate -o {PIC_PATH}{date}.jpg")
+    return {"data":f"{date}.jpg"}
 
-    return send_file(PIC_PATH + f"{date}.jpg", mimetype="image/jpg")
-
-
+@app.route("/api/images/<path:path>")
+def send_report(path):
+    return send_from_directory("../data/pics", path)
+    
 def get_response_image(image_path):
     pil_img = Image.open(image_path, mode="r")  # reads the PIL image
     byte_arr = io.BytesIO()
-    pil_img.save(byte_arr, format="PNG")  # convert the PIL image to byte array
+    pil_img.save(byte_arr, format="JPG")  # convert the PIL image to byte array
     encoded_img = encodebytes(byte_arr.getvalue()).decode("ascii")  # encode as base64
     return encoded_img
 
