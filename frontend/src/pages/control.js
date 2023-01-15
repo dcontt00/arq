@@ -52,11 +52,7 @@ export default function Control() {
   }
 
   useEffect(()=>{
-    const interval = setInterval(() => {
       getControlData();
-      setSeconds(seconds => seconds + 1);
-    }, 100);
-    return () => clearInterval(interval)
   }, [])
 
   // Run every 30 seconds
