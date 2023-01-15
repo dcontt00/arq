@@ -76,8 +76,8 @@ class Control_thread():
                     self.log.info("Error in irrigation_thread")
                     self.log.info(e.with_traceback())
                     pump.off()
-                else:
-                    break
+            else:
+                break
 
             
     def light_function(self, name="light_thread"):
@@ -101,8 +101,8 @@ class Control_thread():
                     self.log.info("Error in light_thread")
                     self.log.info(e.with_traceback())
                     light.off()
-                else:
-                    break
+            else:
+                break
 
     def start_threads(self):
         self.stop_threads = False
