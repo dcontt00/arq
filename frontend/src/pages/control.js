@@ -39,6 +39,26 @@ export default function Control() {
     setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
   }
 
+  async function getControlData(){
+    const response = await axios.get("/api/control/data");
+    const data = await response.data;
+    setObjTemp(data.temperature);
+    setObjHumidity(data.humidity);
+    setObjSoil_moisture(data.soil_moisture); 
+  }
+
+  async function handleSubmit(event) {
+    axios.post("/api/control", { "temperature": objTemp, "humidity": objHumidity, "soil_moisture": objSoil_moisture})
+  }
+
+  useEffect(()=>{
+    const interval = setInterval(() => {
+      getControlData();
+      setSeconds(seconds => seconds + 1);
+    }, 100);
+    return () => clearInterval(interval)
+  }, [])
+
   // Run every 30 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -99,7 +119,7 @@ export default function Control() {
             <Button sx={{ mt: 3, mb: 2 }} onClick={objTemp < 100 ? () => setObjTemp(objTemp + 1) : undefined}><AddIcon />
             </Button>
           </Stack>
-
+          <Button sx={{ mt: 3, mb: 2 }} onClick={(e) => handleSubmit(e)}>Submit</Button>
         </Grid>
         <Grid item lg={6} >
           <Typography variant="h4">Valor actual</Typography>
