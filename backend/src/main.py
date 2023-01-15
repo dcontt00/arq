@@ -54,6 +54,7 @@ def data_function_thread(name):
         time.sleep(600)
 
 data_thread = threading.Thread(target=data_function_thread, args=("data_thread"), daemon="true")
+data_thread.start()
 
 MINS_TO_UPDATE = 1
 PIC_PATH = "../data/pics/"
@@ -160,9 +161,20 @@ def post_control_data():
     temperature = float(data["temperature"])
     humidity = float(data["humidity"])
     soilMoisture = float(data["soil_moisture"])
-    db.set_control_data(temperature=temperature, humidity=humidity, soil_moisture=soilMoisture)  
+    db.set_control_data(temperature=temperature, humidity=humidity, soil_moisture=soilMoisture) 
     return {"message": "Done"}
 
+@app.route("/api/auto", methods=["POST"])
+def post_auto_control():
+    data = request.get_json()
+    status = int(data["status"])
+    if(status == 1):
+        if(control_threads.stop_threads):
+            control_threads.start_threads()
+    elif(status == 0):
+        if(not control_threads.stop_threads):
+            control_threads.stop_threads = True
+    return {"message": "Threads Status: " + str(control_threads.stop_threads)}
 
 @app.route("/api/relay", methods=["POST"])
 def post_relay_toggle():
