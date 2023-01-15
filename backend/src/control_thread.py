@@ -41,7 +41,7 @@ class Control_thread():
                 control_data = self.database.get_control_data()
                 humidity, temperature = dh11.read()
                 self.log.info("Input Data: Humidity=%f,  Temperature=%f"%(humidity, temperature))
-
+                self.log.info("Database Data: Humidity=%f,  Temperature=%f"%(control_data["humidity"], control_data["temperature"]))
                 if(humidity > control_data["humidity"] or temperature > control_data["temperature"]):
                     fans.on()
                     time.sleep(30)
