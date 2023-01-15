@@ -109,7 +109,7 @@ export default function Control() {
             <Button sx={{ mt: 3, mb: 2 }} onClick={objTemp < 100 ? () => setObjTemp(objTemp + 1) : undefined}><AddIcon />
             </Button>
           </Stack>
-          <Button sx={{ mt: 3, mb: 2 }} onClick={(e) => handleSubmit(e)}>Submit</Button>
+          <Button sx={{ mt: 3, mb: 2 }} variant="contained" onClick={(e) => handleSubmit(e)}>Submit</Button>
         </Grid>
         <Grid item lg={6} >
           <Typography variant="h4">Valor actual</Typography>
