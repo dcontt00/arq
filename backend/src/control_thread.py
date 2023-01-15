@@ -41,8 +41,11 @@ class Control_thread():
 
             if(humidity > control_data["humidity"] or temperature > control_data["temperature"]):
                 fans.on()
+                time.sleep(30)
             else:
                 fans.off()
+                time.sleep(200)
+
             print("Result: %i"%(fans.status(),))
 
     def irrigation_function(self, name="irrigation_thread"):
@@ -72,9 +75,11 @@ class Control_thread():
         light_sensor = LightSensor(23)
         while(True):
             print("#light_thread")
-            if(light_sensor.read()):
+            if(light_sensor.read() == 1):
                 light.off()
+                time.sleep(30)
             else:
                 light.on()
+                time.sleep(200)
             print("Light Status: " + light.status())
             
