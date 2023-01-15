@@ -69,46 +69,52 @@ export default function Camera() {
       <Typography variant="h4" align="center">CONTROL VISUAL</Typography>
       <Grid container spacing={2}>
         <Grid item lg={6} >
-          {image == null ?
-            <Box width={"500px"} height="400px">
-              <CircularProgress />
+          <Paper>
 
-            </Box> :
-            <img src={image} alt="img" width="100%" />
-          }
-          <br />
+            {image == null ?
+              <Box width={"500px"} height="400px">
+                <CircularProgress />
 
-          <Button sx={{ backgroundColor: "green" }} onClick={() => getData()}>
-            <AddPhoto sx={{ fontSize: 25 }} />
-          </Button>
+              </Box> :
+              <img src={image} alt="img" width="100%" />
+            }
+            <br />
+
+            <Button sx={{ backgroundColor: "green" }} onClick={() => getData()}>
+              <AddPhoto sx={{ fontSize: 25 }} />
+            </Button>
+          </Paper>
         </Grid>
         <Grid item lg={6} >
-          {images.length == 0 ?
-            <Box width={"500px"} height="400px">
-              <CircularProgress />
-            </Box> :
+          <Paper>
+
+            {images.length == 0 ?
+              <Box width={"500px"} height="400px">
+                <CircularProgress />
+              </Box> :
 
 
-            <ImageList sx={{ width: "100%", height: 500 }} cols={2} rowHeight={164}>
-              {images.map((item, key) => (
-                <ImageListItem key={key}>
-                  <img
-                    src={item.img}
-                    loading="lazy"
-                    onClick={() => {
-                      setSelectedImage(item.img);
-                      setShowDialog(true);
-                    }}
-                  />
-                  <ImageListItemBar
-                    title={item.title}
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
+              <ImageList sx={{ width: "100%", height: 500 }} cols={2} rowHeight={164}>
+                {images.map((item, key) => (
+                  <ImageListItem key={key}>
+                    <img
+                      src={item.img}
+                      loading="lazy"
+                      onClick={() => {
+                        setSelectedImage(item.img);
+                        setShowDialog(true);
+                      }}
+                    />
+                    <ImageListItemBar
+                      title={item.title}
+                    />
+                  </ImageListItem>
+                ))}
+              </ImageList>
 
-          }
+            }
 
+          </Paper>
         </Grid>
       </Grid>
     </Container>
