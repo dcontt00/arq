@@ -11,7 +11,7 @@ import { getImageData } from "../components/itemData";
 import Container from '@mui/material/Container';
 import axios from "axios";
 import { Skeleton } from "@mui/material";
-import { CircularProgress, Paper } from "@mui/material";
+import { CircularProgress, Paper, ImageListItemBar } from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 export default function Camera() {
   const [image, setImage] = React.useState(null);
@@ -33,31 +33,31 @@ export default function Camera() {
 
     // Lista de fotos
     const response2 = await axios.get("/api/images");
-    console.log(response2)
     var data2 = await response2.data;
     data2 = data2.data;
-    console.log("data2")
-    console.log(data2)
     var out = []
+
+    // Order alphabetically inverse data2
+    data2 = data2.sort();
+    data2 = data2.reverse();
+    console.log(data2)
+
+
     data2.map((item) => {
-      console.log(item)
-      out.push("/api/images/" + item)
+      var title = item;
+      title = title.replace(".jpg", "")
+      title = title.replace("_", " ")
+
+      out.push({ "img": "/api/images/" + item, "title": title })
     })
     setImages(out);
 
   }
 
-
-
   React.useEffect(() => {
     getData();
 
   }, []);
-
-
-
-
-
 
   return (
     <Container maxWidth="xl">
@@ -82,23 +82,26 @@ export default function Camera() {
             <AddPhoto sx={{ fontSize: 25 }} />
           </Button>
         </Grid>
-        <Grid item lg={5} >
+        <Grid item lg={6} >
           {images.length == 0 ?
             <Box width={"500px"} height="400px">
               <CircularProgress />
             </Box> :
 
 
-            <ImageList sx={{ width: "100%", height: 500 }} cols={3} rowHeight={164}>
+            <ImageList sx={{ width: "100%", height: 500 }} cols={2} rowHeight={164}>
               {images.map((item, key) => (
                 <ImageListItem key={key}>
                   <img
-                    src={item}
+                    src={item.img}
                     loading="lazy"
                     onClick={() => {
-                      setSelectedImage(item);
+                      setSelectedImage(item.img);
                       setShowDialog(true);
                     }}
+                  />
+                  <ImageListItemBar
+                    title={item.title}
                   />
                 </ImageListItem>
               ))}
