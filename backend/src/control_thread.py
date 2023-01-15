@@ -30,56 +30,68 @@ class Control_thread():
 
 
     def temp_function(self, name="temperature_thread"):
-        print("Running Thread: temperature_thread")
         fans = Relay(4)  # id=1
         dh11 = DHT11(18)
+        print("Running Thread: temperature_thread")
         while(True):
-            print("#temperature_thread")
-            control_data = self.database.get_control_data()
-            humidity, temperature = dh11.read()
-            print("Input Data: Humidity=%f,  Temperature=%f"%(humidity, temperature))
+            try:
+                print("#temperature_thread")
+                control_data = self.database.get_control_data()
+                humidity, temperature = dh11.read()
+                print("Input Data: Humidity=%f,  Temperature=%f"%(humidity, temperature))
 
-            if(humidity > control_data["humidity"] or temperature > control_data["temperature"]):
-                fans.on()
-                time.sleep(30)
-            else:
-                fans.off()
-                time.sleep(200)
+                if(humidity > control_data["humidity"] or temperature > control_data["temperature"]):
+                    fans.on()
+                    time.sleep(30)
+                else:
+                    fans.off()
+                    time.sleep(200)
 
-            print("Result: %i"%(fans.status(),))
+                print("Result: %i"%(fans.status(),))
+            except:
+                print("Error in temperature_thread")
+                fans.is_off()
 
     def irrigation_function(self, name="irrigation_thread"):
-        print("Running Thread: irrigation_thread")
         pump = Relay(17)  # id=2
         soilMoisture = SoilMoisture()
+        print("Running Thread: irrigation_thread")
         while(True):
-            print("#irrigation_thread")
-            control_data = self.database.get_control_data()
-            soil_list = soilMoisture.read()
-            avgMoisture = (soil_list[0] + soil_list[1])/2
-            print("Input Data: Soil Moisture 1=%f,  Soil Moisture 2= %f"%(soil_list[0], soil_list[1]))
+            try:
+                print("#irrigation_thread")
+                control_data = self.database.get_control_data()
+                soil_list = soilMoisture.read()
+                avgMoisture = (soil_list[0] + soil_list[1])/2
+                print("Input Data: Soil Moisture 1=%f,  Soil Moisture 2= %f"%(soil_list[0], soil_list[1]))
 
-
-            if(avgMoisture < control_data["soil_moisture"]):
-                print("Pump On")
-                pump.on()
-                time.sleep(10)
-                print("Pump Off")
+                if(avgMoisture < control_data["soil_moisture"]):
+                    print("Pump On")
+                    pump.on()
+                    time.sleep(10)
+                    print("Pump Off")
+                    pump.off()
+                
+                time.sleep(200)
+            except:
+                print("Error in irrigation_thread")
                 pump.off()
-            
-            time.sleep(200)
 
+            
     def light_function(self, name="light_thread"):
-        print("Running Thread: light_thread")
+        
         light = Relay(27)  # id=3
         light_sensor = LightSensor(23)
+        print("Running Thread: light_thread")
         while(True):
-            print("#light_thread")
-            if(light_sensor.read() == 1):
+            try:
+                print("#light_thread")
+                if(light_sensor.read() == 0):
+                    light.off()
+                    time.sleep(30)
+                else:
+                    light.on()
+                    time.sleep(200)
+                print("Light Status: %i"%(light.status(),))
+            except:
+                print("Error in light_thread")
                 light.off()
-                time.sleep(30)
-            else:
-                light.on()
-                time.sleep(200)
-            print("Light Status: %i"%(light.status(),))
-            
