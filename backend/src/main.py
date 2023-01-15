@@ -145,9 +145,9 @@ def post_control_data():
     Introduce Control data into database
     """
     data = request.get_json()
-    temperature = float(request["temperature"])
-    humidity = float(request["humidity"])
-    soilMoisture = float(request["soilMoisture"])
+    temperature = float(data["temperature"])
+    humidity = float(data["humidity"])
+    soilMoisture = float(data["soilMoisture"])
     db.set_control_data(temperature=temperature, humidity=humidity, soil_moisture=soilMoisture)  
     return {"message": "Done"}
 
