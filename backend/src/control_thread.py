@@ -81,5 +81,5 @@ class Control_thread():
             else:
                 light.on()
                 time.sleep(200)
-            print("Light Status: " + light.status())
+            print("Light Status: %i"%(light.status(),))
             
