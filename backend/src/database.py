@@ -96,10 +96,10 @@ class Database:
         return data
 
     def set_control_data(self, temperature, humidity, soil_moisture):
-        data = self.get_control_data()
+        datab = self.get_control_data()
         sql = """ UPDATE controlData SET temperature = ?, humidity = ?, soil_moisture = ? WHERE id = ?"""
 
-        data = (temperature, humidity, soil_moisture, data["id"])
+        data = (temperature, humidity, soil_moisture, datab["id"])
         con = self.create_connection(DB)
         cur = con.cursor()
 
@@ -126,4 +126,4 @@ class Database:
                     "soil_moisture": row[3],
                 }
             )
-        return data[len(data - 1)]
+        return data[len(data) - 1]
