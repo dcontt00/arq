@@ -158,7 +158,10 @@ def get_historical_data():
 def get_image():
     date = time.strftime("%Y-%m-%d_%H:%M:%S")
     os.system(f"libcamera-still --immediate -o {PIC_PATH}{date}.jpg")
-    return {"data":f"{date}.jpg"}
+    pil_img = Image.open(PIC_PATH + f"{date}.jpg", mode="r")  # reads the PIL image
+    rotated = pil_img.rotate(180)
+    rotated.save(PIC_PATH + f"{date}.jpg")
+    return {"data": f"{date}.jpg"}
 
 @app.route("/api/images/<path:path>")
 def send_report(path):
