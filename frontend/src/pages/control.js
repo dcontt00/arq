@@ -52,17 +52,10 @@ export default function Control() {
   }
 
   useEffect(()=>{
-      getControlData();
+    getData()
+    getControlData();
   }, [])
 
-  // Run every 30 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getData();
-      setSeconds(seconds => seconds + 1);
-    }, 30000);// 30 segundos
-    return () => clearInterval(interval);
-  });
   return (
     <Container>
       <Grid container spacing={2}>
