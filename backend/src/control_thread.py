@@ -52,7 +52,7 @@ class Control_thread():
                 self.log.info("Result: %i"%(fans.status(),))
             except Exception as e:
                 self.log.info("Error in temperature_thread")
-                self.log.info(e)
+                self.log.info(e.with_traceback())
                 fans.is_off()
 
     def irrigation_function(self, name="irrigation_thread"):
@@ -77,7 +77,7 @@ class Control_thread():
                 time.sleep(200)
             except Exception as e:
                 self.log.info("Error in irrigation_thread")
-                self.log.info(e)
+                self.log.info(e.with_traceback())
                 pump.off()
 
             
@@ -98,5 +98,5 @@ class Control_thread():
                 self.log.info("Light Status: %i"%(light.status(),))
             except Exception as e:
                 self.log.info("Error in light_thread")
-                self.log.info(e)
+                self.log.info(e.with_traceback())
                 light.off()
