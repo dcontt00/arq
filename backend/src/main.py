@@ -121,6 +121,18 @@ def get_data():
         "light_sensor": light_sensor_value,
     }
 
+@app.route("/api/control", methods=["POST"])
+def post_control_data():
+    """
+    Introduce Control data into database
+    """
+    data = request.get_json()
+    temperature = float(request["temperature"])
+    humidity = float(request["humidity"])
+    soilMoisture = float(request["soilMoisture"])
+    db.set_control_data(temperature=temperature, humidity=humidity, soil_moisture=soilMoisture)  
+    return {"message": "Done"}
+
 
 @app.route("/api/relay", methods=["POST"])
 def post_relay_toggle():
