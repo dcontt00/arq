@@ -59,7 +59,9 @@ class Database:
 
     def add_data(self, temperature, humidity, soil_moisture):
         """add data to the database"""
-        sql = """ """
+        sql = (
+            """ INSERT INTO data(temperature, humidity, soil_moisture) VALUES(?,?,?)"""
+        )
 
         data = [temperature, humidity, soil_moisture]
 
@@ -95,7 +97,7 @@ class Database:
 
     def set_control_data(self, temperature, humidity, soil_moisture):
         data = self.get_control_data()
-        sql = """ UPDATE controlData SET temperature=%f, humidity=%f, soil_moisture=%f WHERE id=%d """
+        sql = """ UPDATE controlData SET temperature = ?, humidity = ?, soil_moisture = ? WHERE id = ?"""
 
         data = (temperature, humidity, soil_moisture, data["id"])
         con = self.create_connection(DB)
@@ -124,4 +126,4 @@ class Database:
                     "soil_moisture": row[3],
                 }
             )
-        return data[len(data-1)]
+        return data[len(data - 1)]
