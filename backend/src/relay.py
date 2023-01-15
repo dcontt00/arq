@@ -6,7 +6,6 @@ class Relay:
     def __init__(self, pin) -> None:
         self._pin = pin
         GPIO.setup(pin, GPIO.OUT)
-        GPIO.output(pin, GPIO.HIGH)
 
     @property
     def pin(self) -> int:
