@@ -85,7 +85,7 @@ class Control_thread():
         while(True):
             try:
                 print("#light_thread")
-                if(light_sensor.read() == 1):
+                if(light_sensor.read() == 0):
                     light.off()
                     time.sleep(30)
                 else:
