@@ -69,7 +69,7 @@ export default function Camera() {
       <Typography variant="h4" align="center">CONTROL VISUAL</Typography>
       <Grid container spacing={2}>
         <Grid item lg={6} >
-          <Paper>
+          <Paper sx={{ p: 2 }}>
 
             {image == null ?
               <Box width={"500px"} height="400px">
@@ -86,7 +86,7 @@ export default function Camera() {
           </Paper>
         </Grid>
         <Grid item lg={6} >
-          <Paper>
+          <Paper sx={{ p: 2 }}>
 
             {images.length == 0 ?
               <Box width={"500px"} height="400px">
