@@ -15,7 +15,7 @@ class SoilMoisture:
         self.ser.write(b'\ 0x01')
         moisture_read = self.ser.readline().decode("utf-8").rstrip().split("/")
         moisture_read = [int(x) for x in moisture_read]
-        moisture_read = [100-((x-250)/(650-250))*100 for x in moisture_read]
+        moisture_read = [100-((x-200)/(650-200))*100 for x in moisture_read]
         return moisture_read
 
     def read_str(self) -> str:
