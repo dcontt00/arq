@@ -86,7 +86,7 @@ export default function DataLook() {
     if (data2.length > 0) {
 
       data2.forEach(element => {
-        temps.push(element.temp)
+        temps.push(element.temperature)
         hums.push(element.humidity)
         soil_moistures.push(element.soil_moisture)
         dates.push(element.date)
