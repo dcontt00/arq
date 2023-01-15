@@ -35,6 +35,7 @@ class Control_thread():
         fans = Relay(4)  # id=1
         dh11 = DHT11(18)
         self.log.info("Running Thread: temperature_thread")
+        time.sleep(10)
         while(True):
             try:
                 self.log.info("#temperature_thread")
@@ -59,6 +60,7 @@ class Control_thread():
         pump = Relay(17)  # id=2
         soilMoisture = SoilMoisture()
         self.log.info("Running Thread: irrigation_thread")
+        time.sleep(10)
         while(True):
             try:
                 self.log.info("#irrigation_thread")
@@ -86,6 +88,7 @@ class Control_thread():
         light = Relay(27)  # id=3
         light_sensor = LightSensor(23)
         self.log.info("Running Thread: light_thread")
+        time.sleep(10)
         while(True):
             try:
                 self.log.info("#light_thread")
