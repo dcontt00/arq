@@ -121,6 +121,24 @@ def get_data():
         "light_sensor": light_sensor_value,
     }
 
+@app.route("/api/control/data", methods=["GET"])
+def get_control_data():
+    """Get Control data
+
+    Returns:
+        Dict: containing 
+    """
+    data = db.get_control_data()
+    humidity = data["humidity"]
+    temperature = data["temperature"]
+    soil_moisture = data["soil_moisture"]
+
+    return {
+        "temperature": temperature,
+        "humidity": humidity,
+        "soil_moisture": soil_moisture,
+    }
+
 @app.route("/api/control", methods=["POST"])
 def post_control_data():
     """
