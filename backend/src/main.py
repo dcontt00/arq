@@ -147,7 +147,7 @@ def post_control_data():
     data = request.get_json()
     temperature = float(data["temperature"])
     humidity = float(data["humidity"])
-    soilMoisture = float(data["soilMoisture"])
+    soilMoisture = float(data["soil_moisture"])
     db.set_control_data(temperature=temperature, humidity=humidity, soil_moisture=soilMoisture)  
     return {"message": "Done"}
 
