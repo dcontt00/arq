@@ -47,13 +47,18 @@ control_threads = Control_thread()
 def data_function_thread(name):
     time.sleep(20)
     while(True):
-        humidity, temperature = dh11.read()
+        log.info("Adding info to history")
+        try:
+            humidity, temperature = dh11.read()
+        except:
+            humidity=30
+            temperature=17
         soil_moisture1 = soilMoisture.read()[0]
         soil_moisture2 = soilMoisture.read()[1]
         db.add_data(temperature=temperature, humidity=humidity, soil_moisture=(soil_moisture1 + soil_moisture1)/2)
         time.sleep(600)
 
-data_thread = threading.Thread(target=data_function_thread, args=("data_thread"), daemon="true")
+data_thread = threading.Thread(target=data_function_thread, args=("data_thread",), daemon="true")
 data_thread.start()
 
 MINS_TO_UPDATE = 1

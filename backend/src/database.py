@@ -64,22 +64,25 @@ class Database:
         )
 
         data = [temperature, humidity, soil_moisture]
+        try:
 
-        con = self.create_connection(DB)
-        cur = con.cursor()
-        cur.execute(sql, data)
-        con.commit()
-        log.info("Added data to database")
-        con.close()
+            con = self.create_connection(DB)
+            cur = con.cursor()
+            cur.execute(sql, data)
+            con.commit()
+            log.info("Added data to database")
+            con.close()
+        except Exception as error:
+            log.error(error)
 
     def get_data(self):
         """get data from the database"""
-        sql = """ SELECT * FROM data """
-
+        sql = """ SELECT * FROM data ORDER BY id DESC LIMIT 20"""
         con = self.create_connection(DB)
         cur = con.cursor()
         cur.execute(sql)
         rows = cur.fetchall()
+        print(rows)
         data = []
         for row in rows:
             data.append(
