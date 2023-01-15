@@ -9,21 +9,23 @@ from dht11 import DHT11
 from light_sensor import LightSensor
 from soil_moisture import SoilMoisture
 from relay import Relay
+from logger import getLogger
 import RPi.GPIO as GPIO
 
 
 class Control_thread():
     def __init__(self) -> None:
+        self.log = getLogger(__name__)
         self.database = Database()
-        print("Creating Thread: temperature_thread")
+        self.log("Creating Thread: temperature_thread")
         self.temp_thread = threading.Thread(target=self.temp_function, args=(self,), daemon="true")
-        print("Created Thread: temperature_thread")
-        print("Creating Thread: irrigation_thread")
+        self.log.info("Created Thread: temperature_thread")
+        self.log.info("Creating Thread: irrigation_thread")
         self.irrig_thread = threading.Thread(target=self.irrigation_function, args=(self,), daemon="true")
-        print("Created Thread: irrigation_thread")
-        print("Creating Thread: light_thread")
+        self.log.info("Created Thread: irrigation_thread")
+        self.log.info("Creating Thread: light_thread")
         self.light_thread = threading.Thread(target=self.light_function, args=(self,), daemon="true")
-        print("Created Thread: light_thread")
+        self.log.info("Created Thread: light_thread")
         self.temp_thread.start()
         self.irrig_thread.start()
         self.light_thread.start()
@@ -32,13 +34,13 @@ class Control_thread():
     def temp_function(self, name="temperature_thread"):
         fans = Relay(4)  # id=1
         dh11 = DHT11(18)
-        print("Running Thread: temperature_thread")
+        self.log.info("Running Thread: temperature_thread")
         while(True):
             try:
-                print("#temperature_thread")
+                self.log.info("#temperature_thread")
                 control_data = self.database.get_control_data()
                 humidity, temperature = dh11.read()
-                print("Input Data: Humidity=%f,  Temperature=%f"%(humidity, temperature))
+                self.log.info("Input Data: Humidity=%f,  Temperature=%f"%(humidity, temperature))
 
                 if(humidity > control_data["humidity"] or temperature > control_data["temperature"]):
                     fans.on()
@@ -47,33 +49,35 @@ class Control_thread():
                     fans.off()
                     time.sleep(200)
 
-                print("Result: %i"%(fans.status(),))
-            except:
-                print("Error in temperature_thread")
+                self.log.info("Result: %i"%(fans.status(),))
+            except Exception as e:
+                self.log.info("Error in temperature_thread")
+                self.log.info(e)
                 fans.is_off()
 
     def irrigation_function(self, name="irrigation_thread"):
         pump = Relay(17)  # id=2
         soilMoisture = SoilMoisture()
-        print("Running Thread: irrigation_thread")
+        self.log.info("Running Thread: irrigation_thread")
         while(True):
             try:
-                print("#irrigation_thread")
+                self.log.info("#irrigation_thread")
                 control_data = self.database.get_control_data()
                 soil_list = soilMoisture.read()
                 avgMoisture = (soil_list[0] + soil_list[1])/2
-                print("Input Data: Soil Moisture 1=%f,  Soil Moisture 2= %f"%(soil_list[0], soil_list[1]))
+                self.log.info("Input Data: Soil Moisture 1=%f,  Soil Moisture 2= %f"%(soil_list[0], soil_list[1]))
 
                 if(avgMoisture < control_data["soil_moisture"]):
-                    print("Pump On")
+                    self.log.info("Pump On")
                     pump.on()
                     time.sleep(10)
-                    print("Pump Off")
+                    self.log.info("Pump Off")
                     pump.off()
                 
                 time.sleep(200)
-            except:
-                print("Error in irrigation_thread")
+            except Exception as e:
+                self.log.info("Error in irrigation_thread")
+                self.log.info(e)
                 pump.off()
 
             
@@ -81,17 +85,18 @@ class Control_thread():
         
         light = Relay(27)  # id=3
         light_sensor = LightSensor(23)
-        print("Running Thread: light_thread")
+        self.log.info("Running Thread: light_thread")
         while(True):
             try:
-                print("#light_thread")
+                self.log.info("#light_thread")
                 if(light_sensor.read() == 0):
                     light.off()
                     time.sleep(30)
                 else:
                     light.on()
                     time.sleep(200)
-                print("Light Status: %i"%(light.status(),))
-            except:
-                print("Error in light_thread")
+                self.log.info("Light Status: %i"%(light.status(),))
+            except Exception as e:
+                self.log.info("Error in light_thread")
+                self.log.info(e)
                 light.off()
