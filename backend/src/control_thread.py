@@ -47,7 +47,7 @@ class Control_thread():
                     time.sleep(30)
                 else:
                     fans.off()
-                    time.sleep(200)
+                    time.sleep(20)
 
                 self.log.info("Result: %i"%(fans.status(),))
             except Exception as e:
