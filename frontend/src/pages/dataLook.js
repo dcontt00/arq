@@ -20,6 +20,8 @@ import {
 } from 'chart.js';
 import axios from "axios";
 import Container from '@mui/material/Container';
+import { CircularProgress } from '@mui/material';
+
 
 ChartJS.register(
   CategoryScale,
@@ -58,6 +60,7 @@ export default function DataLook() {
   const [light, setLight] = useState(0);
   const [soil_moisture, setSoil_moisture] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [showGraph, setShowGraph] = useState(false);
 
 
   async function getData() {
@@ -70,8 +73,11 @@ export default function DataLook() {
     setSoil_moisture((data.soil_moisture1 + data.soil_moisture2) / 2);
 
     const response2 = await axios.get("/api/data/historical");
-    const data2 = await response2.data;
+    var data2 = await response2.data;
     console.log(data2);
+    data2 = data2.data;
+    console.log(data2);
+
     var temps = []
     var hums = []
     var soil_moistures = []
@@ -80,7 +86,7 @@ export default function DataLook() {
     if (data2.length > 0) {
 
       data2.forEach(element => {
-        temps.push(element.temp)
+        temps.push(element.temperature)
         hums.push(element.humidity)
         soil_moistures.push(element.soil_moisture)
         dates.push(element.date)
@@ -115,6 +121,7 @@ export default function DataLook() {
       ]
     };
     setDatos(dat);
+    setShowGraph(true);
   }
 
   // Run every 30 seconds
@@ -140,9 +147,9 @@ export default function DataLook() {
           <Typography variant="h3">INFORMACIÓN BÁSICA</Typography>
         </Grid>
         {/* Grafica de los datos */}
-        <Grid item lg={9}  >
+        <Grid item lg={9} >
           <Paper>
-            <Line data={datos} />
+            {showGraph ? <Line data={datos} /> : <CircularProgress />}
           </Paper>
         </Grid>
         {/* Datos */}

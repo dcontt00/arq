@@ -3,3 +3,4 @@ flask
 pyserial
 Pillow
 dht11
+flask-cors
