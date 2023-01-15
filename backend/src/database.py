@@ -56,18 +56,16 @@ class Database:
         con = self.create_connection(DB)
         c = con.cursor()
         c.execute(sql_create_table)
-        sql = """ INSERT INTO controlData(temperature, humidity, soil_moisture)
-                VALUES(?,?,?) """
+        sql = """ UPDATE controlData SET temperature=%f, humidity=%f, soil_moisture=%f WHERE id=%d """
 
-        data = [10.0, 20.0, 50.0]
+        data = (10.0, 20.0, 50.0, 0)
         c.execute(sql, data)
         con.commit()
         con.close()
 
     def add_data(self, temperature, humidity, soil_moisture):
         """add data to the database"""
-        sql = """ INSERT INTO data(temperature, humidity, soil_moisture)
-                VALUES(?,?,?) """
+        sql = """ """
 
         data = [temperature, humidity, soil_moisture]
 
