@@ -17,7 +17,7 @@ class Control_thread():
     def __init__(self) -> None:
         self.log = getLogger(__name__)
         self.database = Database()
-        self.log("Creating Thread: temperature_thread")
+        self.log.info("Creating Thread: temperature_thread")
         self.temp_thread = threading.Thread(target=self.temp_function, args=(self,), daemon="true")
         self.log.info("Created Thread: temperature_thread")
         self.log.info("Creating Thread: irrigation_thread")
