@@ -12,9 +12,12 @@ import Container from '@mui/material/Container';
 import axios from "axios";
 import { Skeleton } from "@mui/material";
 import { CircularProgress, Paper } from "@mui/material";
+import Dialog from '@mui/material/Dialog';
 export default function Camera() {
   const [image, setImage] = React.useState(null);
   const [images, setImages] = React.useState([]);
+  const [selectedImage, setSelectedImage] = React.useState(null);
+  const [showDialog, setShowDialog] = React.useState(false);
 
   async function getData() {
 
@@ -44,6 +47,8 @@ export default function Camera() {
 
   }
 
+
+
   React.useEffect(() => {
     getData();
 
@@ -52,38 +57,55 @@ export default function Camera() {
 
 
 
+
+
   return (
-    <Container>
-      <Typography fontSize="25" align="center" sx={{ mt: 1, mb: 1 }}>CONTROL VISUAL</Typography>
-      <Grid container>
-        <Grid item lg={6} sx={{ ml: 5, mt: 3 }}>
-          <Box align="center">
-            {image == null ?
-              <Box width={"500px"} height="400px">
-                <CircularProgress />
+    <Container maxWidth="xl">
+      <Dialog open={showDialog}>
+        <Button onClick={() => setShowDialog(false)}>Cerrar</Button>
+        <img src={selectedImage} alt="img" width="100%" />
 
-              </Box> :
-              <img src={image} alt="img" width="550px" />
-            }
+      </Dialog>
+      <Typography variant="h4" align="center">CONTROL VISUAL</Typography>
+      <Grid container spacing={2}>
+        <Grid item lg={6} >
+          {image == null ?
+            <Box width={"500px"} height="400px">
+              <CircularProgress />
 
-          </Box>
-          <Box align="center" sx={{ mt: 1 }}>
-            <Button sx={{ backgroundColor: "green" }}>
-              <AddPhoto sx={{ fontSize: 25 }} />
-            </Button>
-          </Box>
+            </Box> :
+            <img src={image} alt="img" width="100%" />
+          }
+          <br />
+
+          <Button sx={{ backgroundColor: "green" }} onClick={() => getData()}>
+            <AddPhoto sx={{ fontSize: 25 }} />
+          </Button>
         </Grid>
-        <Grid item lg={5} sx={{ mt: 4 }}>
-          <ImageList sx={{ width: 500, height: 340 }} cols={3} rowHeight={164}>
-            {images.map((item, key) => (
-              <ImageListItem key={key}>
-                <img
-                  src={item}
-                  loading="lazy"
-                />
-              </ImageListItem>
-            ))}
-          </ImageList>
+        <Grid item lg={5} >
+          {images.length == 0 ?
+            <Box width={"500px"} height="400px">
+              <CircularProgress />
+            </Box> :
+
+
+            <ImageList sx={{ width: "100%", height: 500 }} cols={3} rowHeight={164}>
+              {images.map((item, key) => (
+                <ImageListItem key={key}>
+                  <img
+                    src={item}
+                    loading="lazy"
+                    onClick={() => {
+                      setSelectedImage(item);
+                      setShowDialog(true);
+                    }}
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+
+          }
+
         </Grid>
       </Grid>
     </Container>
