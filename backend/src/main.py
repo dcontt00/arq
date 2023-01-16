@@ -44,28 +44,36 @@ db = Database()
 
 control_threads = Control_thread()
 
+
 def data_function_thread(name):
     time.sleep(20)
-    while(True):
+    while True:
         log.info("Adding info to history")
         try:
             humidity, temperature = dh11.read()
+            soil_moisture1 = soilMoisture.read()[0]
+            soil_moisture2 = soilMoisture.read()[1]
+            db.add_data(
+                temperature=temperature,
+                humidity=humidity,
+                soil_moisture=(soil_moisture1 + soil_moisture2) / 2,
+            )
         except:
-            humidity=30
-            temperature=17
-        soil_moisture1 = soilMoisture.read()[0]
-        soil_moisture2 = soilMoisture.read()[1]
-        db.add_data(temperature=temperature, humidity=humidity, soil_moisture=(soil_moisture1 + soil_moisture1)/2)
+            log.error("Error reading sensors")
+
         time.sleep(600)
 
-data_thread = threading.Thread(target=data_function_thread, args=("data_thread",), daemon="true")
+
+data_thread = threading.Thread(
+    target=data_function_thread, args=("data_thread",), daemon="true"
+)
 data_thread.start()
 
 MINS_TO_UPDATE = 1
 PIC_PATH = "../data/pics/"
 if not os.path.exists("../data/pics"):
     os.makedirs("../data/pics")
-    
+
 app = Flask(__name__, static_folder="../../frontend/build")
 CORS(app)
 
@@ -139,12 +147,13 @@ def get_data():
         "light_sensor": light_sensor_value,
     }
 
+
 @app.route("/api/control/data", methods=["GET"])
 def get_control_data():
     """Get Control data
 
     Returns:
-        Dict: containing 
+        Dict: containing
     """
     data = db.get_control_data()
     humidity = data["humidity"]
@@ -157,6 +166,7 @@ def get_control_data():
         "soil_moisture": soil_moisture,
     }
 
+
 @app.route("/api/control", methods=["POST"])
 def post_control_data():
     """
@@ -166,20 +176,24 @@ def post_control_data():
     temperature = float(data["temperature"])
     humidity = float(data["humidity"])
     soilMoisture = float(data["soil_moisture"])
-    db.set_control_data(temperature=temperature, humidity=humidity, soil_moisture=soilMoisture) 
+    db.set_control_data(
+        temperature=temperature, humidity=humidity, soil_moisture=soilMoisture
+    )
     return {"message": "Done"}
+
 
 @app.route("/api/auto", methods=["POST"])
 def post_auto_control():
     data = request.get_json()
     status = int(data["status"])
-    if(status == 1):
-        if(control_threads.stop_threads):
+    if status == 1:
+        if control_threads.stop_threads:
             control_threads.start_threads()
-    elif(status == 0):
-        if(not control_threads.stop_threads):
+    elif status == 0:
+        if not control_threads.stop_threads:
             control_threads.stop_threads = True
     return {"message": "Threads Status: " + str(control_threads.stop_threads)}
+
 
 @app.route("/api/relay", methods=["POST"])
 def post_relay_toggle():
@@ -210,10 +224,12 @@ def get_image():
     rotated.save(PIC_PATH + f"{date}.jpg")
     return {"data": f"{date}.jpg"}
 
+
 @app.route("/api/images/<path:path>")
 def send_report(path):
     return send_from_directory("../data/pics", path)
-    
+
+
 def get_response_image(image_path):
     pil_img = Image.open(image_path, mode="r")  # reads the PIL image
     byte_arr = io.BytesIO()
